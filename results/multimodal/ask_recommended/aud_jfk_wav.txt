@@ -1,0 +1,10 @@
+
+
+========== 回答 ==========
+And so, my fellow Americans, ask not what your country can do for you, ask what you can do for your country.
+
+[结束原因] stop
+
+
+[用量] 输入 87 token，输出 27 token
+[首字时间] 0.28 秒  [总耗时] 1.50 秒

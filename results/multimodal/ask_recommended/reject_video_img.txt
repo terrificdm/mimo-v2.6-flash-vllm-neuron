@@ -1,0 +1,1 @@
+HTTP 400: {"error":{"message":"this request needs 17 vision/audio encoder blocks (image 1, video 16; 1 block = 1024 tokens per image / video time group, 1 per audio) but the compiled configuration takes at most 16 per request; send fewer or smaller images / videos","type":"BadRequestError","param":null,"code":400}}

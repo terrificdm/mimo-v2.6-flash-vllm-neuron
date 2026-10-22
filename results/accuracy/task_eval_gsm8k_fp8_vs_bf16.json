@@ -1,0 +1,13 @@
+{
+ "a": "results/task_eval/gsm8k_fp8_1m_mm.json",
+ "b": "results/task_eval/gsm8k_bf16_4096.json",
+ "task": "gsm8k",
+ "n_common": 200,
+ "acc_a": 0.98,
+ "acc_b": 0.98,
+ "same_pred": 0.995,
+ "same_correctness": 1.0,
+ "same_reply_text": 0.295,
+ "only_a_correct": [],
+ "only_b_correct": []
+}

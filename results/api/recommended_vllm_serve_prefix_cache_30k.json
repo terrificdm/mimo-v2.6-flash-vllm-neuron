@@ -1,0 +1,61 @@
+{
+ "utc": "2026-10-22T17:04:57Z",
+ "prompts_file": "$MIMO_WORK/results/longctx/needle_ctx32k_prompts.json",
+ "max_tokens": 64,
+ "compare": null,
+ "cases": [
+  {
+   "id": "N1@30000@10",
+   "prompt_tokens": 30006,
+   "ttft_s": {
+    "cold": 3.866,
+    "repeat": 0.261,
+    "follow_up": 0.263
+   },
+   "cached_tokens": {
+    "cold": null,
+    "repeat": null,
+    "follow_up": null
+   },
+   "repeat_identical": true,
+   "records": {
+    "cold": {
+     "http_status": 200,
+     "ttft_s": 3.866,
+     "elapsed_s": 4.297,
+     "usage": {
+      "prompt_tokens": 30006,
+      "total_tokens": 30014,
+      "completion_tokens": 8
+     },
+     "text": "7492-ALPHA",
+     "error": null
+    },
+    "repeat": {
+     "http_status": 200,
+     "ttft_s": 0.261,
+     "elapsed_s": 0.587,
+     "usage": {
+      "prompt_tokens": 30006,
+      "total_tokens": 30014,
+      "completion_tokens": 8
+     },
+     "text": "7492-ALPHA",
+     "error": null
+    },
+    "follow_up": {
+     "http_status": 200,
+     "ttft_s": 0.263,
+     "elapsed_s": 1.166,
+     "usage": {
+      "prompt_tokens": 30041,
+      "total_tokens": 30061,
+      "completion_tokens": 20
+     },
+     "text": "7492-ALPHA\n\nThe special magic number was found in the blue warehouse.",
+     "error": null
+    }
+   }
+  }
+ ]
+}

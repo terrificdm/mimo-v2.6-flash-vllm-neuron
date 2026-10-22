@@ -1,0 +1,2737 @@
+{
+ "script": "run_logit_validation.py",
+ "batch_mode": "b1",
+ "decode_moe_impl": "tkg",
+ "environment": {
+  "MIMO_DECODE_MOE_IMPL": "tkg",
+  "VLLM_NEURON_CPU_MODE": null,
+  "NKI_SIMULATOR": null,
+  "VLLM_NEURON_DISABLE_NKI_KERNELS": null,
+  "VLLM_CACHE_ROOT": "$VLLM_CACHE_ROOT",
+  "VLLM_NEURON_COMPILATION_TIMEOUT": "7200",
+  "VLLM_EXECUTE_MODEL_TIMEOUT_SECONDS": "7200",
+  "VLLM_ENGINE_READY_TIMEOUT_S": "14400"
+ },
+ "model_dir": "$MIMO_MODELS/MiMo-V2.6-Flash-MOPD-fp8-L3",
+ "goldens": "$MIMO_WORK/goldens/L3_gpusim",
+ "tp": 64,
+ "max_num_seqs": 1,
+ "max_model_len": 16384,
+ "kv_segment_size": 4096,
+ "prompts": [
+  "P1",
+  "P2",
+  "P3",
+  "P4"
+ ],
+ "passed": true,
+ "all_prompts_passed": false,
+ "aggregate": {
+  "pp_static_0.03": "3/4",
+  "pp_static_0.05": "3/4",
+  "pp_max_linf_1.5x": "4/4",
+  "pp_max_linf_2.0x": "4/4",
+  "pp_max_l2_1.5x": "4/4",
+  "pp_max_l2_2.0x": "4/4",
+  "pp_tok_linf_1.5x": "1/4",
+  "pp_tok_linf_2.0x": "1/4",
+  "pp_tok_l2_1.5x": "1/4",
+  "pp_tok_l2_2.0x": "1/4",
+  "agg_bc": "FAIL",
+  "per_token_bc": [
+   0.9739182084412005,
+   0.9981723836621466,
+   0.9824150453015184,
+   0.9989372256086535,
+   0.9578005703335346,
+   0.9979230068098046,
+   0.9136819097016645,
+   0.9989945035613211,
+   0.9989479857815529,
+   0.9171359256195623,
+   0.9984438352132918,
+   0.9998528806666628,
+   0.9990304997916281,
+   0.9416996557703277,
+   0.9993588509049742,
+   0.8923008191593138
+  ],
+  "agg_sigma_ratio": 0.907088577747345,
+  "agg_linf_1.2x": "FAIL",
+  "agg_linf_1.5x": "FAIL",
+  "agg_l2_1.2x": "FAIL",
+  "agg_l2_1.5x": "FAIL"
+ },
+ "tolerances": {
+  "tol_map": {
+   "5": [
+    1e-05,
+    0.011
+   ],
+   "50": [
+    1e-05,
+    0.02
+   ],
+   "1000": [
+    1e-05,
+    0.03
+   ],
+   "all": [
+    1e-05,
+    0.05
+   ]
+  },
+  "top5_rtol_override": null,
+  "divergence_n_ulps": 1,
+  "mantissa_bits": 7,
+  "dynamic_threshold_config": {
+   "linf_multiplier": 1.5,
+   "l2_multiplier": 1.5
+  },
+  "aggregate_config": {
+   "pp_static_thresholds": [
+    0.03,
+    0.05
+   ],
+   "pp_linf_multipliers": [
+    1.5,
+    2.0
+   ],
+   "pp_l2_multipliers": [
+    1.5,
+    2.0
+   ],
+   "pp_tok_linf_multipliers": [
+    1.5,
+    2.0
+   ],
+   "pp_tok_l2_multipliers": [
+    1.5,
+    2.0
+   ],
+   "agg_bc_threshold": 0.99,
+   "agg_linf_multipliers": [
+    1.2,
+    1.5
+   ],
+   "agg_l2_multipliers": [
+    1.2,
+    1.5
+   ],
+   "agg_sigma_ratio_threshold": 1.0
+  }
+ },
+ "per_prompt": {
+  "P1": {
+   "prompt_tokens": 13,
+   "passed": true,
+   "failed_steps": [],
+   "divergent_steps": [],
+   "fp32_golden_tokens": [
+    138378,
+    71388,
+    143941,
+    139738,
+    142806,
+    122958,
+    139738,
+    142806,
+    122958,
+    139738,
+    114889,
+    138571,
+    50944,
+    143941,
+    139738,
+    142806
+   ],
+   "steps": [
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004147704690694809,
+      "50": 0.008495531044900417,
+      "1000": 0.008495531044900417,
+      "all": 0.008495531044900417
+     },
+     "shift": 0.00286717112634409,
+     "expected_top2_indices": [
+      138378,
+      139625
+     ],
+     "actual_top2_indices": [
+      138378,
+      139625
+     ],
+     "expected_top2_values": [
+      14.375,
+      12.1875
+     ],
+     "actual_top2_values": [
+      14.372133255004883,
+      12.184633255004883
+     ],
+     "expected_top1_top2_diff": 2.1875,
+     "three_way": {
+      "base_linf": 0.009787842631340027,
+      "tgt_linf": 0.008401505649089813,
+      "base_l2": 0.007623022422194481,
+      "tgt_l2": 0.006713750772178173,
+      "bc": 0.9951623872454575,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004684619605541229,
+      "50": 0.004684619605541229,
+      "1000": 0.004684619605541229,
+      "all": 0.006474678870290518
+     },
+     "shift": 0.003094523138855883,
+     "expected_top2_indices": [
+      71388,
+      143941
+     ],
+     "actual_top2_indices": [
+      71388,
+      143941
+     ],
+     "expected_top2_values": [
+      14.0,
+      13.125
+     ],
+     "actual_top2_values": [
+      13.996905326843262,
+      13.121905326843262
+     ],
+     "expected_top1_top2_diff": 0.875,
+     "three_way": {
+      "base_linf": 0.00645532738417387,
+      "tgt_linf": 0.00714250560849905,
+      "base_l2": 0.006427963729947805,
+      "tgt_l2": 0.005590287037193775,
+      "bc": 0.9937937187708418,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.009938348084688187,
+      "50": 0.014816396869719028,
+      "1000": 0.014816396869719028,
+      "all": 0.016527170315384865
+     },
+     "shift": 0.00234517994545051,
+     "expected_top2_indices": [
+      143941,
+      34573
+     ],
+     "actual_top2_indices": [
+      143941,
+      34573
+     ],
+     "expected_top2_values": [
+      12.8125,
+      11.875
+     ],
+     "actual_top2_values": [
+      12.747654914855957,
+      11.935154914855957
+     ],
+     "expected_top1_top2_diff": 0.9375,
+     "three_way": {
+      "base_linf": 0.02057264745235443,
+      "tgt_linf": 0.023394355550408363,
+      "base_l2": 0.023431694135069847,
+      "tgt_l2": 0.02703973837196827,
+      "bc": 0.992837111662462,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004099670797586441,
+      "50": 0.004482646938413382,
+      "1000": 0.004482646938413382,
+      "all": 0.006628537084907293
+     },
+     "shift": -0.0027880731671146657,
+     "expected_top2_indices": [
+      139738,
+      134367
+     ],
+     "actual_top2_indices": [
+      139738,
+      134367
+     ],
+     "expected_top2_values": [
+      14.5625,
+      12.3125
+     ],
+     "actual_top2_values": [
+      14.502788543701172,
+      12.315288543701172
+     ],
+     "expected_top1_top2_diff": 2.25,
+     "three_way": {
+      "base_linf": 0.0054579852148890495,
+      "tgt_linf": 0.006059032864868641,
+      "base_l2": 0.006472606677561998,
+      "tgt_l2": 0.006032316945493221,
+      "bc": 0.9980770282419631,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.00022015819558873773,
+      "50": 0.005170653574168682,
+      "1000": 0.007204000372439623,
+      "all": 0.007204000372439623
+     },
+     "shift": 0.002789579055094716,
+     "expected_top2_indices": [
+      142806,
+      136558
+     ],
+     "actual_top2_indices": [
+      142806,
+      136558
+     ],
+     "expected_top2_values": [
+      12.625,
+      12.0
+     ],
+     "actual_top2_values": [
+      12.622210502624512,
+      11.997210502624512
+     ],
+     "expected_top1_top2_diff": 0.625,
+     "three_way": {
+      "base_linf": 0.008838786743581295,
+      "tgt_linf": 0.006695662159472704,
+      "base_l2": 0.006666936445981264,
+      "tgt_l2": 0.0059785014018416405,
+      "bc": 0.9971171159981616,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0001854689617175609,
+      "50": 0.0048890491016209126,
+      "1000": 0.005261611193418503,
+      "all": 0.007456091232597828
+     },
+     "shift": -0.002293299006517554,
+     "expected_top2_indices": [
+      122958,
+      104633
+     ],
+     "actual_top2_indices": [
+      122958,
+      104633
+     ],
+     "expected_top2_values": [
+      12.3125,
+      11.5
+     ],
+     "actual_top2_values": [
+      12.314793586730957,
+      11.502293586730957
+     ],
+     "expected_top1_top2_diff": 0.8125,
+     "three_way": {
+      "base_linf": 0.006312481593340635,
+      "tgt_linf": 0.0063767158426344395,
+      "base_l2": 0.00644533708691597,
+      "tgt_l2": 0.006156979128718376,
+      "bc": 0.9979952594871295,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004034668207168579,
+      "50": 0.004584642127156258,
+      "1000": 0.006739781703799963,
+      "all": 0.006739781703799963
+     },
+     "shift": 0.003986846150292702,
+     "expected_top2_indices": [
+      139738,
+      142806
+     ],
+     "actual_top2_indices": [
+      139738,
+      142806
+     ],
+     "expected_top2_values": [
+      14.5,
+      12.8125
+     ],
+     "actual_top2_values": [
+      14.558512687683105,
+      12.871012687683105
+     ],
+     "expected_top1_top2_diff": 1.6875,
+     "three_way": {
+      "base_linf": 0.005915307439863682,
+      "tgt_linf": 0.005809904541820288,
+      "base_l2": 0.005775756668299437,
+      "tgt_l2": 0.005802369676530361,
+      "bc": 0.9988005810871476,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.00510939909145236,
+      "50": 0.00510939909145236,
+      "1000": 0.005109437741339207,
+      "all": 0.007660458330065012
+     },
+     "shift": 0.00010057556996876251,
+     "expected_top2_indices": [
+      142806,
+      114889
+     ],
+     "actual_top2_indices": [
+      142806,
+      114889
+     ],
+     "expected_top2_values": [
+      12.25,
+      11.875
+     ],
+     "actual_top2_values": [
+      12.249899864196777,
+      11.874899864196777
+     ],
+     "expected_top1_top2_diff": 0.375,
+     "three_way": {
+      "base_linf": 0.00849209912121296,
+      "tgt_linf": 0.00827770121395588,
+      "base_l2": 0.0064712087623775005,
+      "tgt_l2": 0.006174130365252495,
+      "bc": 0.9974162534731408,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 1.436461116099963e-05,
+      "50": 0.005116405431181192,
+      "1000": 0.005116405431181192,
+      "all": 0.007088752463459969
+     },
+     "shift": 0.00018578348211815667,
+     "expected_top2_indices": [
+      122958,
+      104633
+     ],
+     "actual_top2_indices": [
+      122958,
+      104633
+     ],
+     "expected_top2_values": [
+      12.25,
+      11.5625
+     ],
+     "actual_top2_values": [
+      12.2498140335083,
+      11.5623140335083
+     ],
+     "expected_top1_top2_diff": 0.6875,
+     "three_way": {
+      "base_linf": 0.005958345718681812,
+      "tgt_linf": 0.005577018018811941,
+      "base_l2": 0.0059952265582978725,
+      "tgt_l2": 0.005537136923521757,
+      "bc": 0.9968668701351736,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0043261367827653885,
+      "50": 0.004483026452362537,
+      "1000": 0.0044830599799752235,
+      "all": 0.007561247795820236
+     },
+     "shift": 0.0011132354608581526,
+     "expected_top2_indices": [
+      139738,
+      143941
+     ],
+     "actual_top2_indices": [
+      139738,
+      143941
+     ],
+     "expected_top2_values": [
+      14.1875,
+      12.9375
+     ],
+     "actual_top2_values": [
+      14.186387062072754,
+      12.998887062072754
+     ],
+     "expected_top1_top2_diff": 1.25,
+     "three_way": {
+      "base_linf": 0.0075332969427108765,
+      "tgt_linf": 0.006958158686757088,
+      "base_l2": 0.007011042907834053,
+      "tgt_l2": 0.006043038796633482,
+      "bc": 0.9936729607163082,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0054715885780751705,
+      "50": 0.0054715885780751705,
+      "1000": 0.0075475783087313175,
+      "all": 0.007950167171657085
+     },
+     "shift": 0.003169183051149697,
+     "expected_top2_indices": [
+      114889,
+      142806
+     ],
+     "actual_top2_indices": [
+      114889,
+      142806
+     ],
+     "expected_top2_values": [
+      12.0,
+      11.875
+     ],
+     "actual_top2_values": [
+      11.996830940246582,
+      11.934330940246582
+     ],
+     "expected_top1_top2_diff": 0.125,
+     "three_way": {
+      "base_linf": 0.006294971331954002,
+      "tgt_linf": 0.005534242372959852,
+      "base_l2": 0.005855650641024113,
+      "tgt_l2": 0.005464330315589905,
+      "bc": 0.997826776895732,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004527506418526173,
+      "50": 0.004527506418526173,
+      "1000": 0.004527540411800146,
+      "all": 0.004804567899554968
+     },
+     "shift": 0.0014614154488974253,
+     "expected_top2_indices": [
+      138571,
+      140083
+     ],
+     "actual_top2_indices": [
+      138571,
+      140083
+     ],
+     "expected_top2_values": [
+      14.125,
+      12.875
+     ],
+     "actual_top2_values": [
+      14.123538970947266,
+      12.811038970947266
+     ],
+     "expected_top1_top2_diff": 1.25,
+     "three_way": {
+      "base_linf": 0.0058165378868579865,
+      "tgt_linf": 0.004500875249505043,
+      "base_l2": 0.004444928839802742,
+      "tgt_l2": 0.0038701703306287527,
+      "bc": 0.9956222238434034,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.005354397464543581,
+      "50": 0.006072345655411482,
+      "1000": 0.006072345655411482,
+      "all": 0.009268036112189293
+     },
+     "shift": 0.00392589428403927,
+     "expected_top2_indices": [
+      50944,
+      105192
+     ],
+     "actual_top2_indices": [
+      50944,
+      105192
+     ],
+     "expected_top2_values": [
+      10.9375,
+      10.875
+     ],
+     "actual_top2_values": [
+      10.933573722839355,
+      10.871073722839355
+     ],
+     "expected_top1_top2_diff": 0.0625,
+     "three_way": {
+      "base_linf": 0.007002674508839846,
+      "tgt_linf": 0.007292897440493107,
+      "base_l2": 0.0061431205831468105,
+      "tgt_l2": 0.0060314214788377285,
+      "bc": 0.9992204776121874,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004052110947668552,
+      "50": 0.0043853577226400375,
+      "1000": 0.0043853577226400375,
+      "all": 0.006161815486848354
+     },
+     "shift": 0.0024682067855387214,
+     "expected_top2_indices": [
+      143941,
+      143338
+     ],
+     "actual_top2_indices": [
+      143941,
+      143338
+     ],
+     "expected_top2_values": [
+      14.8125,
+      12.125
+     ],
+     "actual_top2_values": [
+      14.81003189086914,
+      12.12253189086914
+     ],
+     "expected_top1_top2_diff": 2.6875,
+     "three_way": {
+      "base_linf": 0.007568514905869961,
+      "tgt_linf": 0.00661684712395072,
+      "base_l2": 0.006332723423838615,
+      "tgt_l2": 0.0063058920204639435,
+      "bc": 0.9982430965728656,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004415783099830151,
+      "50": 0.004415783099830151,
+      "1000": 0.0044158161617815495,
+      "all": 0.005488760769367218
+     },
+     "shift": -0.0018151631340014385,
+     "expected_top2_indices": [
+      139738,
+      143941
+     ],
+     "actual_top2_indices": [
+      139738,
+      143941
+     ],
+     "expected_top2_values": [
+      14.5625,
+      12.0625
+     ],
+     "actual_top2_values": [
+      14.564314842224121,
+      12.001814842224121
+     ],
+     "expected_top1_top2_diff": 2.5,
+     "three_way": {
+      "base_linf": 0.02438312955200672,
+      "tgt_linf": 0.024775046855211258,
+      "base_l2": 0.025532996281981468,
+      "tgt_l2": 0.02557351440191269,
+      "bc": 0.9982319428050348,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.00951439794152975,
+      "50": 0.010788545943796635,
+      "1000": 0.019666682928800583,
+      "all": 0.024742823094129562
+     },
+     "shift": 0.007843979154454757,
+     "expected_top2_indices": [
+      142806,
+      114889
+     ],
+     "actual_top2_indices": [
+      142806,
+      114889
+     ],
+     "expected_top2_values": [
+      12.3125,
+      11.9375
+     ],
+     "actual_top2_values": [
+      12.429656028747559,
+      11.867156028747559
+     ],
+     "expected_top1_top2_diff": 0.375,
+     "three_way": {
+      "base_linf": 0.0077172028832137585,
+      "tgt_linf": 0.026972191408276558,
+      "base_l2": 0.006145612336695194,
+      "tgt_l2": 0.01992075890302658,
+      "bc": 0.7607651409703658,
+      "passed": false
+     }
+    }
+   ]
+  },
+  "P2": {
+   "prompt_tokens": 188,
+   "passed": false,
+   "failed_steps": [
+    2
+   ],
+   "divergent_steps": [],
+   "fp32_golden_tokens": [
+    143941,
+    139738,
+    142806,
+    122958,
+    139738,
+    142806,
+    122958,
+    139738,
+    142806,
+    122958,
+    139738,
+    142806,
+    122958,
+    139738,
+    142806,
+    122958
+   ],
+   "steps": [
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0046701873652637005,
+      "50": 0.0046701873652637005,
+      "1000": 0.0046701873652637005,
+      "all": 0.0077157760970294476
+     },
+     "shift": -0.002308516475422513,
+     "expected_top2_indices": [
+      143941,
+      139738
+     ],
+     "actual_top2_indices": [
+      143941,
+      139738
+     ],
+     "expected_top2_values": [
+      13.875,
+      13.0625
+     ],
+     "actual_top2_values": [
+      13.93980884552002,
+      13.06480884552002
+     ],
+     "expected_top1_top2_diff": 0.8125,
+     "three_way": {
+      "base_linf": 0.005761586595326662,
+      "tgt_linf": 0.006461046636104584,
+      "base_l2": 0.005723391193896532,
+      "tgt_l2": 0.006627396680414677,
+      "bc": 0.9948328265153719,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004242817405611277,
+      "50": 0.004242817405611277,
+      "1000": 0.004242817405611277,
+      "all": 0.0063490797765553
+     },
+     "shift": 9.129159731663645e-05,
+     "expected_top2_indices": [
+      139738,
+      143941
+     ],
+     "actual_top2_indices": [
+      139738,
+      143941
+     ],
+     "expected_top2_values": [
+      14.75,
+      12.4375
+     ],
+     "actual_top2_values": [
+      14.687408447265625,
+      12.437408447265625
+     ],
+     "expected_top1_top2_diff": 2.3125,
+     "three_way": {
+      "base_linf": 0.005276655312627554,
+      "tgt_linf": 0.00550063606351614,
+      "base_l2": 0.005425877869129181,
+      "tgt_l2": 0.0048100752755999565,
+      "bc": 0.9953261191349546,
+      "passed": true
+     }
+    },
+    {
+     "passed": false,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.028723809868097305,
+      "50": 0.028723809868097305,
+      "1000": 0.031071193516254425,
+      "all": 0.03700242191553116
+     },
+     "shift": 0.007395272069261234,
+     "expected_top2_indices": [
+      142806,
+      145107
+     ],
+     "actual_top2_indices": [
+      142806,
+      145107
+     ],
+     "expected_top2_values": [
+      13.3125,
+      12.1875
+     ],
+     "actual_top2_values": [
+      13.11760425567627,
+      12.05510425567627
+     ],
+     "expected_top1_top2_diff": 1.125,
+     "three_way": {
+      "base_linf": 0.03653589263558388,
+      "tgt_linf": 0.006160655524581671,
+      "base_l2": 0.03376774117350578,
+      "tgt_l2": 0.006300610490143299,
+      "bc": 0.6106219010614479,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 6.530090468004346e-05,
+      "50": 0.005193506367504597,
+      "1000": 0.0051935454830527306,
+      "all": 0.006343275308609009
+     },
+     "shift": 0.0008062599982244357,
+     "expected_top2_indices": [
+      122958,
+      145107
+     ],
+     "actual_top2_indices": [
+      122958,
+      145107
+     ],
+     "expected_top2_values": [
+      12.1875,
+      11.3125
+     ],
+     "actual_top2_values": [
+      12.186694145202637,
+      11.311694145202637
+     ],
+     "expected_top1_top2_diff": 0.875,
+     "three_way": {
+      "base_linf": 0.006347760558128357,
+      "tgt_linf": 0.0053893341682851315,
+      "base_l2": 0.005543116945773363,
+      "tgt_l2": 0.004802053794264793,
+      "bc": 0.9940237549732109,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0078292116522789,
+      "50": 0.008363825269043446,
+      "1000": 0.01646099053323269,
+      "all": 0.01646099053323269
+     },
+     "shift": -0.004126396128480745,
+     "expected_top2_indices": [
+      139738,
+      142806
+     ],
+     "actual_top2_indices": [
+      139738,
+      142806
+     ],
+     "expected_top2_values": [
+      15.4375,
+      14.0
+     ],
+     "actual_top2_values": [
+      15.50412654876709,
+      13.87912654876709
+     ],
+     "expected_top1_top2_diff": 1.4375,
+     "three_way": {
+      "base_linf": 0.015999358147382736,
+      "tgt_linf": 0.005609708372503519,
+      "base_l2": 0.019267484545707703,
+      "tgt_l2": 0.005713716149330139,
+      "bc": 0.7558889414500558,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004802248906344175,
+      "50": 0.004802248906344175,
+      "1000": 0.004802248906344175,
+      "all": 0.008354129269719124
+     },
+     "shift": 0.00023918693436140656,
+     "expected_top2_indices": [
+      142806,
+      145107
+     ],
+     "actual_top2_indices": [
+      142806,
+      145107
+     ],
+     "expected_top2_values": [
+      13.0625,
+      12.0625
+     ],
+     "actual_top2_values": [
+      12.999760627746582,
+      12.124760627746582
+     ],
+     "expected_top1_top2_diff": 1.0,
+     "three_way": {
+      "base_linf": 0.006250457372516394,
+      "tgt_linf": 0.005446943920105696,
+      "base_l2": 0.005410569254308939,
+      "tgt_l2": 0.005171353463083506,
+      "bc": 0.9994204676062692,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0051600150763988495,
+      "50": 0.0051600150763988495,
+      "1000": 0.0051600150763988495,
+      "all": 0.006376844830811024
+     },
+     "shift": 0.0003972845969367477,
+     "expected_top2_indices": [
+      122958,
+      145107
+     ],
+     "actual_top2_indices": [
+      122958,
+      145107
+     ],
+     "expected_top2_values": [
+      12.1875,
+      11.375
+     ],
+     "actual_top2_values": [
+      12.187102317810059,
+      11.374602317810059
+     ],
+     "expected_top1_top2_diff": 0.8125,
+     "three_way": {
+      "base_linf": 0.007857094518840313,
+      "tgt_linf": 0.0069115133956074715,
+      "base_l2": 0.005361094605177641,
+      "tgt_l2": 0.004955207463353872,
+      "bc": 0.9973055253195184,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0038386366795748472,
+      "50": 0.0078872200101614,
+      "1000": 0.0078872200101614,
+      "all": 0.0078872200101614
+     },
+     "shift": -0.0032308790247132786,
+     "expected_top2_indices": [
+      139738,
+      142806
+     ],
+     "actual_top2_indices": [
+      139738,
+      142806
+     ],
+     "expected_top2_values": [
+      15.4375,
+      13.9375
+     ],
+     "actual_top2_values": [
+      15.378231048583984,
+      13.878231048583984
+     ],
+     "expected_top1_top2_diff": 1.5,
+     "three_way": {
+      "base_linf": 0.005846814252436161,
+      "tgt_linf": 0.0065718055702745914,
+      "base_l2": 0.0059113153256475925,
+      "tgt_l2": 0.005743096116930246,
+      "bc": 0.9990891338443354,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.00010837477020686492,
+      "50": 0.0048702796921133995,
+      "1000": 0.0048702796921133995,
+      "all": 0.0070329587906599045
+     },
+     "shift": 0.0014325552204574711,
+     "expected_top2_indices": [
+      142806,
+      114889
+     ],
+     "actual_top2_indices": [
+      142806,
+      114889
+     ],
+     "expected_top2_values": [
+      13.125,
+      12.375
+     ],
+     "actual_top2_values": [
+      13.123567581176758,
+      12.373567581176758
+     ],
+     "expected_top1_top2_diff": 0.75,
+     "three_way": {
+      "base_linf": 0.009510209783911705,
+      "tgt_linf": 0.007698270492255688,
+      "base_l2": 0.005825886502861977,
+      "tgt_l2": 0.0056565748527646065,
+      "bc": 0.9983027108350873,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.005448366980999708,
+      "50": 0.005448366980999708,
+      "1000": 0.005448366980999708,
+      "all": 0.007370544131845236
+     },
+     "shift": 0.003911547909372788,
+     "expected_top2_indices": [
+      122958,
+      145107
+     ],
+     "actual_top2_indices": [
+      122958,
+      145107
+     ],
+     "expected_top2_values": [
+      12.1875,
+      11.3125
+     ],
+     "actual_top2_values": [
+      12.121088027954102,
+      11.371088027954102
+     ],
+     "expected_top1_top2_diff": 0.875,
+     "three_way": {
+      "base_linf": 0.005785231478512287,
+      "tgt_linf": 0.0070035140961408615,
+      "base_l2": 0.005023823119699955,
+      "tgt_l2": 0.005839156452566385,
+      "bc": 0.9933864180113249,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004054236691445112,
+      "50": 0.004054236691445112,
+      "1000": 0.004054236691445112,
+      "all": 0.006078527774661779
+     },
+     "shift": 9.714573218930817e-05,
+     "expected_top2_indices": [
+      139738,
+      142806
+     ],
+     "actual_top2_indices": [
+      139738,
+      142806
+     ],
+     "expected_top2_values": [
+      15.4375,
+      13.875
+     ],
+     "actual_top2_values": [
+      15.437402725219727,
+      13.812402725219727
+     ],
+     "expected_top1_top2_diff": 1.5625,
+     "three_way": {
+      "base_linf": 0.005920064635574818,
+      "tgt_linf": 0.0048330845311284065,
+      "base_l2": 0.005915781483054161,
+      "tgt_l2": 0.005580965895205736,
+      "bc": 0.9983064936080951,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 4.880726191913709e-05,
+      "50": 0.0048334961757063866,
+      "1000": 0.004833532962948084,
+      "all": 0.0071266586892306805
+     },
+     "shift": 0.0006479384622143862,
+     "expected_top2_indices": [
+      142806,
+      114889
+     ],
+     "actual_top2_indices": [
+      142806,
+      114889
+     ],
+     "expected_top2_values": [
+      13.0625,
+      12.4375
+     ],
+     "actual_top2_values": [
+      13.06185245513916,
+      12.43685245513916
+     ],
+     "expected_top1_top2_diff": 0.625,
+     "three_way": {
+      "base_linf": 0.005644624121487141,
+      "tgt_linf": 0.005753428675234318,
+      "base_l2": 0.005256551783531904,
+      "tgt_l2": 0.005209540482610464,
+      "bc": 0.9989942281401079,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 4.268659540684894e-05,
+      "50": 0.005170891992747784,
+      "1000": 0.005170891992747784,
+      "all": 0.006372815929353237
+     },
+     "shift": -0.0005302568052762138,
+     "expected_top2_indices": [
+      122958,
+      145107
+     ],
+     "actual_top2_indices": [
+      122958,
+      145107
+     ],
+     "expected_top2_values": [
+      12.1875,
+      11.375
+     ],
+     "actual_top2_values": [
+      12.188030242919922,
+      11.375530242919922
+     ],
+     "expected_top1_top2_diff": 0.8125,
+     "three_way": {
+      "base_linf": 0.005884159822016954,
+      "tgt_linf": 0.006835584063082933,
+      "base_l2": 0.005718863569200039,
+      "tgt_l2": 0.005328650586307049,
+      "bc": 0.9977175523849406,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.008358894847333431,
+      "50": 0.015833362936973572,
+      "1000": 0.01986558921635151,
+      "all": 0.01986558921635151
+     },
+     "shift": -0.004573277294389446,
+     "expected_top2_indices": [
+      139738,
+      142806
+     ],
+     "actual_top2_indices": [
+      139738,
+      142806
+     ],
+     "expected_top2_values": [
+      15.5,
+      13.75
+     ],
+     "actual_top2_values": [
+      15.442072868347168,
+      13.817072868347168
+     ],
+     "expected_top1_top2_diff": 1.75,
+     "three_way": {
+      "base_linf": 0.020321032032370567,
+      "tgt_linf": 0.00810674112290144,
+      "base_l2": 0.025735484436154366,
+      "tgt_l2": 0.005587319377809763,
+      "bc": 0.6664733984643998,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004700258374214172,
+      "50": 0.0049135880544781685,
+      "1000": 0.009507950395345688,
+      "all": 0.009507950395345688
+     },
+     "shift": 0.001386559221478104,
+     "expected_top2_indices": [
+      142806,
+      114889
+     ],
+     "actual_top2_indices": [
+      142806,
+      114889
+     ],
+     "expected_top2_values": [
+      13.0,
+      12.5
+     ],
+     "actual_top2_values": [
+      13.061113357543945,
+      12.498613357543945
+     ],
+     "expected_top1_top2_diff": 0.5,
+     "three_way": {
+      "base_linf": 0.007184222340583801,
+      "tgt_linf": 0.0072557213716208935,
+      "base_l2": 0.006184802856296301,
+      "tgt_l2": 0.005238694604486227,
+      "bc": 0.9924605449138956,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.010947008617222309,
+      "50": 0.010947008617222309,
+      "1000": 0.026331622153520584,
+      "all": 0.03264109417796135
+     },
+     "shift": -0.008426715535193913,
+     "expected_top2_indices": [
+      122958,
+      145107
+     ],
+     "actual_top2_indices": [
+      122958,
+      23861
+     ],
+     "expected_top2_values": [
+      12.1875,
+      11.375
+     ],
+     "actual_top2_values": [
+      12.320926666259766,
+      11.258426666259766
+     ],
+     "expected_top1_top2_diff": 0.8125,
+     "three_way": {
+      "base_linf": 0.007030679378658533,
+      "tgt_linf": 0.02865622006356716,
+      "base_l2": 0.005606325343251228,
+      "tgt_l2": 0.02589990384876728,
+      "bc": 0.6657672725546684,
+      "passed": false
+     }
+    }
+   ]
+  },
+  "P3": {
+   "prompt_tokens": 45,
+   "passed": true,
+   "failed_steps": [],
+   "divergent_steps": [],
+   "fp32_golden_tokens": [
+    143941,
+    139738,
+    114889,
+    138571,
+    50944,
+    143941,
+    139738,
+    142806,
+    122958,
+    139738,
+    114889,
+    138571,
+    50944,
+    143941,
+    139738,
+    142806
+   ],
+   "steps": [
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.005315327551215887,
+      "50": 0.014839136973023415,
+      "1000": 0.014839136973023415,
+      "all": 0.01960100419819355
+     },
+     "shift": 0.0072732270792209225,
+     "expected_top2_indices": [
+      143941,
+      139738
+     ],
+     "actual_top2_indices": [
+      143941,
+      139738
+     ],
+     "expected_top2_values": [
+      13.125,
+      12.0625
+     ],
+     "actual_top2_values": [
+      13.11772632598877,
+      12.11772632598877
+     ],
+     "expected_top1_top2_diff": 1.0625,
+     "three_way": {
+      "base_linf": 0.017695721238851547,
+      "tgt_linf": 0.008634718134999275,
+      "base_l2": 0.019321566447615623,
+      "tgt_l2": 0.00806614849716425,
+      "bc": 0.8553919136865001,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004132176283746958,
+      "50": 0.004199823830276728,
+      "1000": 0.004199823830276728,
+      "all": 0.006215541623532772
+     },
+     "shift": -0.000506886616119128,
+     "expected_top2_indices": [
+      139738,
+      134367
+     ],
+     "actual_top2_indices": [
+      139738,
+      134367
+     ],
+     "expected_top2_values": [
+      15.0,
+      11.8125
+     ],
+     "actual_top2_values": [
+      15.000507354736328,
+      11.813007354736328
+     ],
+     "expected_top1_top2_diff": 3.1875,
+     "three_way": {
+      "base_linf": 0.0057510631158947945,
+      "tgt_linf": 0.005963134113699198,
+      "base_l2": 0.006352245341986418,
+      "tgt_l2": 0.005654608365148306,
+      "bc": 0.9954985101784682,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004974919371306896,
+      "50": 0.004974919371306896,
+      "1000": 0.007390378043055534,
+      "all": 0.007390378043055534
+     },
+     "shift": -0.0018728730046043767,
+     "expected_top2_indices": [
+      114889,
+      142806
+     ],
+     "actual_top2_indices": [
+      114889,
+      142806
+     ],
+     "expected_top2_values": [
+      12.9375,
+      12.8125
+     ],
+     "actual_top2_values": [
+      12.939373016357422,
+      12.814373016357422
+     ],
+     "expected_top1_top2_diff": 0.125,
+     "three_way": {
+      "base_linf": 0.006289103999733925,
+      "tgt_linf": 0.007455900311470032,
+      "base_l2": 0.005686309654265642,
+      "tgt_l2": 0.005761692300438881,
+      "bc": 0.9992774872127109,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0043959841132164,
+      "50": 0.004452157765626907,
+      "1000": 0.004452157765626907,
+      "all": 0.004452157765626907
+     },
+     "shift": -0.0003967435535539624,
+     "expected_top2_indices": [
+      138571,
+      140083
+     ],
+     "actual_top2_indices": [
+      138571,
+      140083
+     ],
+     "expected_top2_values": [
+      14.125,
+      12.875
+     ],
+     "actual_top2_values": [
+      14.062896728515625,
+      12.875396728515625
+     ],
+     "expected_top1_top2_diff": 1.25,
+     "three_way": {
+      "base_linf": 0.0042753261514008045,
+      "tgt_linf": 0.0037473845295608044,
+      "base_l2": 0.00426005432382226,
+      "tgt_l2": 0.003985055256634951,
+      "bc": 0.9988780933703489,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.005760027561336756,
+      "50": 0.005760027561336756,
+      "1000": 0.005760027561336756,
+      "all": 0.008837858214974403
+     },
+     "shift": 0.003390083534652279,
+     "expected_top2_indices": [
+      50944,
+      150263
+     ],
+     "actual_top2_indices": [
+      50944,
+      51976
+     ],
+     "expected_top2_values": [
+      11.4375,
+      10.5625
+     ],
+     "actual_top2_values": [
+      11.434109687805176,
+      10.496609687805176
+     ],
+     "expected_top1_top2_diff": 0.875,
+     "three_way": {
+      "base_linf": 0.006305301561951637,
+      "tgt_linf": 0.005634158384054899,
+      "base_l2": 0.005669859703630209,
+      "tgt_l2": 0.005360499955713749,
+      "bc": 0.9991789880017572,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0042014350183308125,
+      "50": 0.0042014350183308125,
+      "1000": 0.0042014350183308125,
+      "all": 0.005247476045042276
+     },
+     "shift": 0.00026908693922430253,
+     "expected_top2_indices": [
+      143941,
+      117276
+     ],
+     "actual_top2_indices": [
+      143941,
+      117276
+     ],
+     "expected_top2_values": [
+      14.9375,
+      12.5
+     ],
+     "actual_top2_values": [
+      14.937231063842773,
+      12.499731063842773
+     ],
+     "expected_top1_top2_diff": 2.4375,
+     "three_way": {
+      "base_linf": 0.0063279722817242146,
+      "tgt_linf": 0.005557946395128965,
+      "base_l2": 0.006681996863335371,
+      "tgt_l2": 0.005703687202185392,
+      "bc": 0.9941093559981248,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004065238870680332,
+      "50": 0.004197902046144009,
+      "1000": 0.004197902046144009,
+      "all": 0.004710889887064695
+     },
+     "shift": -0.0010034115199765283,
+     "expected_top2_indices": [
+      139738,
+      143941
+     ],
+     "actual_top2_indices": [
+      139738,
+      143941
+     ],
+     "expected_top2_values": [
+      15.125,
+      11.9375
+     ],
+     "actual_top2_values": [
+      15.12600326538086,
+      11.87600326538086
+     ],
+     "expected_top1_top2_diff": 3.1875,
+     "three_way": {
+      "base_linf": 0.006676665507256985,
+      "tgt_linf": 0.006569586228579283,
+      "base_l2": 0.006099643651396036,
+      "tgt_l2": 0.005858400836586952,
+      "bc": 0.9977859311264838,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004758370574563742,
+      "50": 0.004809476435184479,
+      "1000": 0.009594165720045567,
+      "all": 0.009594165720045567
+     },
+     "shift": -0.00033384757296994337,
+     "expected_top2_indices": [
+      142806,
+      114889
+     ],
+     "actual_top2_indices": [
+      142806,
+      114889
+     ],
+     "expected_top2_values": [
+      13.0625,
+      12.9375
+     ],
+     "actual_top2_values": [
+      13.000333786010742,
+      12.937833786010742
+     ],
+     "expected_top1_top2_diff": 0.125,
+     "three_way": {
+      "base_linf": 0.010205330327153206,
+      "tgt_linf": 0.010179738514125347,
+      "base_l2": 0.006702158600091934,
+      "tgt_l2": 0.00612113531678915,
+      "bc": 0.9972082144397679,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 1.3488063814293128e-05,
+      "50": 0.0047528245486319065,
+      "1000": 0.0047528245486319065,
+      "all": 0.005937622394412756
+     },
+     "shift": 0.00018749630953348312,
+     "expected_top2_indices": [
+      122958,
+      143809
+     ],
+     "actual_top2_indices": [
+      122958,
+      143809
+     ],
+     "expected_top2_values": [
+      13.1875,
+      11.9375
+     ],
+     "actual_top2_values": [
+      13.187312126159668,
+      11.937312126159668
+     ],
+     "expected_top1_top2_diff": 1.25,
+     "three_way": {
+      "base_linf": 0.009315756149590015,
+      "tgt_linf": 0.006461591925472021,
+      "base_l2": 0.006465925835072994,
+      "tgt_l2": 0.005792626179754734,
+      "bc": 0.995949802646275,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004127909895032644,
+      "50": 0.004127909895032644,
+      "1000": 0.004127909895032644,
+      "all": 0.006116680335253477
+     },
+     "shift": 0.0004608130576136627,
+     "expected_top2_indices": [
+      139738,
+      142806
+     ],
+     "actual_top2_indices": [
+      139738,
+      142806
+     ],
+     "expected_top2_values": [
+      15.25,
+      13.375
+     ],
+     "actual_top2_values": [
+      15.187039375305176,
+      13.312039375305176
+     ],
+     "expected_top1_top2_diff": 1.875,
+     "three_way": {
+      "base_linf": 0.005299451295286417,
+      "tgt_linf": 0.005111249163746834,
+      "base_l2": 0.005938160698860884,
+      "tgt_l2": 0.0056715416721999645,
+      "bc": 0.9988488865787447,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004879549145698547,
+      "50": 0.004879549145698547,
+      "1000": 0.004879549145698547,
+      "all": 0.004879549145698547
+     },
+     "shift": -0.0009437620958163838,
+     "expected_top2_indices": [
+      114889,
+      142806
+     ],
+     "actual_top2_indices": [
+      114889,
+      142806
+     ],
+     "expected_top2_values": [
+      13.0,
+      12.8125
+     ],
+     "actual_top2_values": [
+      13.000944137573242,
+      12.875944137573242
+     ],
+     "expected_top1_top2_diff": 0.1875,
+     "three_way": {
+      "base_linf": 0.007448979653418064,
+      "tgt_linf": 0.006834882777184248,
+      "base_l2": 0.005834468640387058,
+      "tgt_l2": 0.005430057179182768,
+      "bc": 0.9976999296172271,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004368436988443136,
+      "50": 0.004479704890400171,
+      "1000": 0.004479704890400171,
+      "all": 0.004644998349249363
+     },
+     "shift": 0.0007856470423826298,
+     "expected_top2_indices": [
+      138571,
+      140083
+     ],
+     "actual_top2_indices": [
+      138571,
+      140083
+     ],
+     "expected_top2_values": [
+      14.125,
+      12.875
+     ],
+     "actual_top2_values": [
+      14.124214172363281,
+      12.874214172363281
+     ],
+     "expected_top1_top2_diff": 1.25,
+     "three_way": {
+      "base_linf": 0.005353888031095266,
+      "tgt_linf": 0.004613431636244059,
+      "base_l2": 0.004131226800382137,
+      "tgt_l2": 0.00439705653116107,
+      "bc": 0.9986782687941251,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 7.231275958474725e-05,
+      "50": 0.005566818173974752,
+      "1000": 0.00556686008349061,
+      "all": 0.0070786261931061745
+     },
+     "shift": 0.0008329133687674975,
+     "expected_top2_indices": [
+      50944,
+      105192
+     ],
+     "actual_top2_indices": [
+      50944,
+      105192
+     ],
+     "expected_top2_values": [
+      11.375,
+      10.5625
+     ],
+     "actual_top2_values": [
+      11.374167442321777,
+      10.561667442321777
+     ],
+     "expected_top1_top2_diff": 0.8125,
+     "three_way": {
+      "base_linf": 0.0072682579047977924,
+      "tgt_linf": 0.007387001067399979,
+      "base_l2": 0.006222600117325783,
+      "tgt_l2": 0.0056038894690573215,
+      "bc": 0.9971021264932542,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004417859949171543,
+      "50": 0.004417859949171543,
+      "1000": 0.007926502265036106,
+      "all": 0.007926533930003643
+     },
+     "shift": -0.004605976682264874,
+     "expected_top2_indices": [
+      143941,
+      139738
+     ],
+     "actual_top2_indices": [
+      143941,
+      139738
+     ],
+     "expected_top2_values": [
+      15.1875,
+      12.5625
+     ],
+     "actual_top2_values": [
+      15.129606246948242,
+      12.504606246948242
+     ],
+     "expected_top1_top2_diff": 2.625,
+     "three_way": {
+      "base_linf": 0.0060311416164040565,
+      "tgt_linf": 0.005155983846634626,
+      "base_l2": 0.006433430593460798,
+      "tgt_l2": 0.005644734017550945,
+      "bc": 0.9952821544208483,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 8.87198475538753e-05,
+      "50": 0.004170352593064308,
+      "1000": 0.004170352593064308,
+      "all": 0.006211169064044952
+     },
+     "shift": -0.0013685295349464598,
+     "expected_top2_indices": [
+      139738,
+      143941
+     ],
+     "actual_top2_indices": [
+      139738,
+      143941
+     ],
+     "expected_top2_values": [
+      15.3125,
+      12.1875
+     ],
+     "actual_top2_values": [
+      15.313868522644043,
+      12.188868522644043
+     ],
+     "expected_top1_top2_diff": 3.125,
+     "three_way": {
+      "base_linf": 0.005557661410421133,
+      "tgt_linf": 0.005184572655707598,
+      "base_l2": 0.005881574470549822,
+      "tgt_l2": 0.005629071034491062,
+      "bc": 0.9980152705324116,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004569424316287041,
+      "50": 0.00499842269346118,
+      "1000": 0.00499845901504159,
+      "all": 0.006961732171475887
+     },
+     "shift": -0.0028021544244918374,
+     "expected_top2_indices": [
+      142806,
+      114889
+     ],
+     "actual_top2_indices": [
+      142806,
+      114889
+     ],
+     "expected_top2_values": [
+      13.0625,
+      12.875
+     ],
+     "actual_top2_values": [
+      13.002801895141602,
+      12.877801895141602
+     ],
+     "expected_top1_top2_diff": 0.1875,
+     "three_way": {
+      "base_linf": 0.0070429593324661255,
+      "tgt_linf": 0.005681654438376427,
+      "base_l2": 0.005894436500966549,
+      "tgt_l2": 0.005274916999042034,
+      "bc": 0.9968356452329754,
+      "passed": true
+     }
+    }
+   ]
+  },
+  "P4": {
+   "prompt_tokens": 375,
+   "passed": false,
+   "failed_steps": [
+    6,
+    9
+   ],
+   "divergent_steps": [],
+   "fp32_golden_tokens": [
+    143941,
+    139738,
+    142806,
+    122958,
+    139738,
+    142806,
+    122958,
+    139738,
+    142806,
+    122958,
+    139738,
+    142806,
+    122958,
+    139738,
+    142806,
+    122958
+   ],
+   "steps": [
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004591336008161306,
+      "50": 0.004591336008161306,
+      "1000": 0.004591336008161306,
+      "all": 0.0068640634417533875
+     },
+     "shift": -0.0006408461955524295,
+     "expected_top2_indices": [
+      143941,
+      139738
+     ],
+     "actual_top2_indices": [
+      143941,
+      139738
+     ],
+     "expected_top2_values": [
+      13.75,
+      13.375
+     ],
+     "actual_top2_values": [
+      13.813140869140625,
+      13.438140869140625
+     ],
+     "expected_top1_top2_diff": 0.375,
+     "three_way": {
+      "base_linf": 0.005956819746643305,
+      "tgt_linf": 0.006622747052460909,
+      "base_l2": 0.006081356666982174,
+      "tgt_l2": 0.006223476026207209,
+      "bc": 0.9993815154007498,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.00413011759519577,
+      "50": 0.00413011759519577,
+      "1000": 0.00413011759519577,
+      "all": 0.004832759033888578
+     },
+     "shift": 0.0023011479865043477,
+     "expected_top2_indices": [
+      139738,
+      134367
+     ],
+     "actual_top2_indices": [
+      139738,
+      131178
+     ],
+     "expected_top2_values": [
+      15.6875,
+      12.5625
+     ],
+     "actual_top2_values": [
+      15.622698783874512,
+      12.622698783874512
+     ],
+     "expected_top1_top2_diff": 3.125,
+     "three_way": {
+      "base_linf": 0.00440717488527298,
+      "tgt_linf": 0.007173661142587662,
+      "base_l2": 0.005049802828580141,
+      "tgt_l2": 0.005387936718761921,
+      "bc": 0.9975439478682184,
+      "passed": false
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004901443608105183,
+      "50": 0.004901443608105183,
+      "1000": 0.004901443608105183,
+      "all": 0.007887783460319042
+     },
+     "shift": 0.003372791174748385,
+     "expected_top2_indices": [
+      142806,
+      121906
+     ],
+     "actual_top2_indices": [
+      142806,
+      121906
+     ],
+     "expected_top2_values": [
+      13.4375,
+      12.75
+     ],
+     "actual_top2_values": [
+      13.371626853942871,
+      12.746626853942871
+     ],
+     "expected_top1_top2_diff": 0.6875,
+     "three_way": {
+      "base_linf": 0.006617645267397165,
+      "tgt_linf": 0.005800595041364431,
+      "base_l2": 0.00558564905077219,
+      "tgt_l2": 0.005516396835446358,
+      "bc": 0.9980518263711007,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.005029050167649984,
+      "50": 0.005029050167649984,
+      "1000": 0.005029050167649984,
+      "all": 0.004980004858225584
+     },
+     "shift": -0.001316287570571359,
+     "expected_top2_indices": [
+      122958,
+      139221
+     ],
+     "actual_top2_indices": [
+      122958,
+      139221
+     ],
+     "expected_top2_values": [
+      12.6875,
+      11.625
+     ],
+     "actual_top2_values": [
+      12.68881607055664,
+      11.68881607055664
+     ],
+     "expected_top1_top2_diff": 1.0625,
+     "three_way": {
+      "base_linf": 0.0052351984195411205,
+      "tgt_linf": 0.006224675569683313,
+      "base_l2": 0.005073864478617907,
+      "tgt_l2": 0.005165295675396919,
+      "bc": 0.9984066629554065,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0037625927943736315,
+      "50": 0.003811952657997608,
+      "1000": 0.0038119815289974213,
+      "all": 0.004709533881396055
+     },
+     "shift": -0.0004076902420073455,
+     "expected_top2_indices": [
+      139738,
+      142806
+     ],
+     "actual_top2_indices": [
+      139738,
+      142806
+     ],
+     "expected_top2_values": [
+      16.5,
+      13.875
+     ],
+     "actual_top2_values": [
+      16.500408172607422,
+      13.875407218933105
+     ],
+     "expected_top1_top2_diff": 2.625,
+     "three_way": {
+      "base_linf": 0.004385953303426504,
+      "tgt_linf": 0.004365260247141123,
+      "base_l2": 0.005529278889298439,
+      "tgt_l2": 0.005548851564526558,
+      "bc": 0.9993301916328942,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 7.274890958797187e-05,
+      "50": 0.0047675846144557,
+      "1000": 0.0047675846144557,
+      "all": 0.005794293247163296
+     },
+     "shift": 0.0009784357347979475,
+     "expected_top2_indices": [
+      142806,
+      121906
+     ],
+     "actual_top2_indices": [
+      142806,
+      121906
+     ],
+     "expected_top2_values": [
+      13.3125,
+      12.6875
+     ],
+     "actual_top2_values": [
+      13.311521530151367,
+      12.686521530151367
+     ],
+     "expected_top1_top2_diff": 0.625,
+     "three_way": {
+      "base_linf": 0.006497170776128769,
+      "tgt_linf": 0.005998373031616211,
+      "base_l2": 0.005690072663128376,
+      "tgt_l2": 0.005036792252212763,
+      "bc": 0.9951506026341422,
+      "passed": true
+     }
+    },
+    {
+     "passed": false,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.010592344217002392,
+      "50": 0.028814945369958878,
+      "1000": 0.04261200875043869,
+      "all": 0.0531376376748085
+     },
+     "shift": 0.009399945194197531,
+     "expected_top2_indices": [
+      122958,
+      139221
+     ],
+     "actual_top2_indices": [
+      122958,
+      139221
+     ],
+     "expected_top2_values": [
+      12.6875,
+      11.4375
+     ],
+     "actual_top2_values": [
+      12.740599632263184,
+      11.490599632263184
+     ],
+     "expected_top1_top2_diff": 1.25,
+     "three_way": {
+      "base_linf": 0.055529944598674774,
+      "tgt_linf": 0.0058282664977014065,
+      "base_l2": 0.052099090069532394,
+      "tgt_l2": 0.006732201669365168,
+      "bc": 0.5147405760808058,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 7.661266135983169e-05,
+      "50": 0.003864433616399765,
+      "1000": 0.003864433616399765,
+      "all": 0.005604022182524204
+     },
+     "shift": -0.001273600739719885,
+     "expected_top2_indices": [
+      139738,
+      142806
+     ],
+     "actual_top2_indices": [
+      139738,
+      142806
+     ],
+     "expected_top2_values": [
+      16.5,
+      13.8125
+     ],
+     "actual_top2_values": [
+      16.50127410888672,
+      13.813773155212402
+     ],
+     "expected_top1_top2_diff": 2.6875,
+     "three_way": {
+      "base_linf": 0.00608774833381176,
+      "tgt_linf": 0.004036802798509598,
+      "base_l2": 0.005684497766196728,
+      "tgt_l2": 0.005257147364318371,
+      "bc": 0.9981184625087183,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004496078472584486,
+      "50": 0.004892090801149607,
+      "1000": 0.004892090801149607,
+      "all": 0.00919091422110796
+     },
+     "shift": 0.002635871279757371,
+     "expected_top2_indices": [
+      142806,
+      121906
+     ],
+     "actual_top2_indices": [
+      142806,
+      121906
+     ],
+     "expected_top2_values": [
+      13.3125,
+      12.6875
+     ],
+     "actual_top2_values": [
+      13.309864044189453,
+      12.747364044189453
+     ],
+     "expected_top1_top2_diff": 0.625,
+     "three_way": {
+      "base_linf": 0.006048762705177069,
+      "tgt_linf": 0.0067880344577133656,
+      "base_l2": 0.005497904494404793,
+      "tgt_l2": 0.00561804324388504,
+      "bc": 0.9977250461228904,
+      "passed": true
+     }
+    },
+    {
+     "passed": false,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.008823881857097149,
+      "50": 0.0284317247569561,
+      "1000": 0.04264513775706291,
+      "all": 0.051836319267749786
+     },
+     "shift": -0.012485549020453918,
+     "expected_top2_indices": [
+      122958,
+      139221
+     ],
+     "actual_top2_indices": [
+      122958,
+      139738
+     ],
+     "expected_top2_values": [
+      12.75,
+      11.5
+     ],
+     "actual_top2_values": [
+      12.69998550415039,
+      11.44998550415039
+     ],
+     "expected_top1_top2_diff": 1.25,
+     "three_way": {
+      "base_linf": 0.0063027190044522285,
+      "tgt_linf": 0.05249352008104324,
+      "base_l2": 0.00545344827696681,
+      "tgt_l2": 0.05060049518942833,
+      "bc": 0.4920097070775554,
+      "passed": false
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0037254863418638706,
+      "50": 0.0038490593433380127,
+      "1000": 0.0038490882143378258,
+      "all": 0.005619396921247244
+     },
+     "shift": -0.0010198988922042154,
+     "expected_top2_indices": [
+      139738,
+      142806
+     ],
+     "actual_top2_indices": [
+      139738,
+      142806
+     ],
+     "expected_top2_values": [
+      16.5,
+      13.8125
+     ],
+     "actual_top2_values": [
+      16.501020431518555,
+      13.813519477844238
+     ],
+     "expected_top1_top2_diff": 2.6875,
+     "three_way": {
+      "base_linf": 0.004723760299384594,
+      "tgt_linf": 0.004867766052484512,
+      "base_l2": 0.005861979443579912,
+      "tgt_l2": 0.005239722318947315,
+      "bc": 0.9963968292741624,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0047889105044305325,
+      "50": 0.0047889105044305325,
+      "1000": 0.0070579503662884235,
+      "all": 0.0070579503662884235
+     },
+     "shift": -0.0006634550478212767,
+     "expected_top2_indices": [
+      142806,
+      114889
+     ],
+     "actual_top2_indices": [
+      142806,
+      114889
+     ],
+     "expected_top2_values": [
+      13.1875,
+      12.8125
+     ],
+     "actual_top2_values": [
+      13.188163757324219,
+      12.750663757324219
+     ],
+     "expected_top1_top2_diff": 0.375,
+     "three_way": {
+      "base_linf": 0.00528149027377367,
+      "tgt_linf": 0.006038432940840721,
+      "base_l2": 0.005052465479820967,
+      "tgt_l2": 0.0054100798442959785,
+      "bc": 0.998882996263369,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.00013467484677676111,
+      "50": 0.005036635790020227,
+      "1000": 0.005036635790020227,
+      "all": 0.005036635790020227
+     },
+     "shift": -0.001726631148374196,
+     "expected_top2_indices": [
+      122958,
+      139221
+     ],
+     "actual_top2_indices": [
+      122958,
+      139221
+     ],
+     "expected_top2_values": [
+      12.75,
+      11.4375
+     ],
+     "actual_top2_values": [
+      12.751727104187012,
+      11.439227104187012
+     ],
+     "expected_top1_top2_diff": 1.3125,
+     "three_way": {
+      "base_linf": 0.00687449611723423,
+      "tgt_linf": 0.0057523371651768684,
+      "base_l2": 0.00533096631988883,
+      "tgt_l2": 0.0050046672113239765,
+      "bc": 0.9981701225374771,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.0074482262134552,
+      "50": 0.0074482262134552,
+      "1000": 0.0074482262134552,
+      "all": 0.0074482262134552
+     },
+     "shift": -0.002094705233651807,
+     "expected_top2_indices": [
+      139738,
+      143941
+     ],
+     "actual_top2_indices": [
+      139738,
+      143941
+     ],
+     "expected_top2_values": [
+      16.5,
+      13.875
+     ],
+     "actual_top2_values": [
+      16.502094268798828,
+      13.814594268798828
+     ],
+     "expected_top1_top2_diff": 2.625,
+     "three_way": {
+      "base_linf": 0.007680804003030062,
+      "tgt_linf": 0.004800386261194944,
+      "base_l2": 0.0059740892611444,
+      "tgt_l2": 0.005115958862006664,
+      "bc": 0.9942463491716738,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004726774524897337,
+      "50": 0.004795511718839407,
+      "1000": 0.009488679468631744,
+      "all": 0.009488679468631744
+     },
+     "shift": 0.00045115794099529415,
+     "expected_top2_indices": [
+      142806,
+      114889
+     ],
+     "actual_top2_indices": [
+      142806,
+      114889
+     ],
+     "expected_top2_values": [
+      13.125,
+      12.8125
+     ],
+     "actual_top2_values": [
+      13.12454891204834,
+      12.87454891204834
+     ],
+     "expected_top1_top2_diff": 0.3125,
+     "three_way": {
+      "base_linf": 0.009072424843907356,
+      "tgt_linf": 0.006914658937603235,
+      "base_l2": 0.006005384027957916,
+      "tgt_l2": 0.00587456626817584,
+      "bc": 0.9984711905799994,
+      "passed": true
+     }
+    },
+    {
+     "passed": true,
+     "divergence": false,
+     "divergence_difference": 0,
+     "divergence_in_bounds": true,
+     "divergence_threshold": 0.001,
+     "error_map": {
+      "5": 0.004612830467522144,
+      "50": 0.005189522635191679,
+      "1000": 0.005189522635191679,
+      "all": 0.007063847966492176
+     },
+     "shift": -0.0036760891119693127,
+     "expected_top2_indices": [
+      122958,
+      139221
+     ],
+     "actual_top2_indices": [
+      122958,
+      139221
+     ],
+     "expected_top2_values": [
+      12.75,
+      11.4375
+     ],
+     "actual_top2_values": [
+      12.753676414489746,
+      11.378676414489746
+     ],
+     "expected_top1_top2_diff": 1.3125,
+     "three_way": {
+      "base_linf": 0.005258094985038042,
+      "tgt_linf": 0.005511708557605743,
+      "base_l2": 0.005329713225364685,
+      "tgt_l2": 0.005281193181872368,
+      "bc": 0.9985883411371689,
+      "passed": true
+     }
+    }
+   ]
+  }
+ },
+ "timing": {
+  "llm_init_s": 98.1,
+  "generate_calls": 4,
+  "generate_s": 17.7,
+  "total_s": 119.1
+ }
+}

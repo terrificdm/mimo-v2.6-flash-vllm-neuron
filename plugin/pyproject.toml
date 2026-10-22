@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mimo-v2-neuron"
+version = "0.1.0"
+description = "vLLM Neuron (vllm-neuron native) implementation of XiaomiMiMo/MiMo-V2.6-Flash for AWS Trainium2"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+dependencies = []
+
+[project.entry-points."vllm.general_plugins"]
+mimo_v2_neuron = "mimo_v2_neuron:register"
+
+[tool.setuptools.packages.find]
+include = ["mimo_v2_neuron*"]

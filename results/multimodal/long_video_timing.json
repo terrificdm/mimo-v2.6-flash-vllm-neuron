@@ -1,0 +1,76 @@
+{
+ "time": "2026-10-22T05:41:46Z",
+ "base": "http://127.0.0.1:8000",
+ "items": {
+  "video_space_3min": {
+   "path": "$MIMO_WORK/mm_assets/large/space_woaudio.mp4",
+   "cold": {
+    "http_status": 200,
+    "elapsed_s": 8.86,
+    "prompt_tokens": 14209,
+    "error": null
+   },
+   "repeat": {
+    "http_status": 200,
+    "elapsed_s": 8.85,
+    "prompt_tokens": 14209,
+    "error": null
+   },
+   "text": {
+    "http_status": 200,
+    "elapsed_s": 3.97,
+    "prompt_tokens": 14218,
+    "error": null
+   },
+   "vision_overhead_s": 4.89,
+   "ok": true
+  },
+  "image_beach_dog": {
+   "path": "$MIMO_WORK/mm_assets/large/beach_dog.jpeg",
+   "cold": {
+    "http_status": 200,
+    "elapsed_s": 1.05,
+    "prompt_tokens": 1029,
+    "error": null
+   },
+   "repeat": {
+    "http_status": 200,
+    "elapsed_s": 1.03,
+    "prompt_tokens": 1029,
+    "error": null
+   },
+   "text": {
+    "http_status": 200,
+    "elapsed_s": 0.99,
+    "prompt_tokens": 1033,
+    "error": null
+   },
+   "vision_overhead_s": 0.06,
+   "ok": true
+  },
+  "video_digits": {
+   "path": "$MIMO_WORK/mm_assets/digits_1234.mp4",
+   "cold": {
+    "http_status": 200,
+    "elapsed_s": 1.35,
+    "prompt_tokens": 621,
+    "error": null
+   },
+   "repeat": {
+    "http_status": 200,
+    "elapsed_s": 1.03,
+    "prompt_tokens": 621,
+    "error": null
+   },
+   "text": {
+    "http_status": 200,
+    "elapsed_s": 0.99,
+    "prompt_tokens": 628,
+    "error": null
+   },
+   "vision_overhead_s": 0.36,
+   "ok": true
+  }
+ },
+ "ok": true
+}

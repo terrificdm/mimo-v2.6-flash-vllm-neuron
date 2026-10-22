@@ -1,0 +1,79 @@
+{
+ "started_utc": "2026-10-22T05:53:15Z",
+ "vit_dp_group": "world",
+ "n": 3,
+ "sizes": {
+  "1024": {
+   "runs": [
+    {
+     "http_status": 200,
+     "latency_s": 1.4039,
+     "prompt_tokens": 1047,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.3842,
+     "prompt_tokens": 1047,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.3924,
+     "prompt_tokens": 1047,
+     "error": null
+    }
+   ],
+   "median_s": 1.3924,
+   "minus_text_s": 1.0864
+  },
+  "2048": {
+   "runs": [
+    {
+     "http_status": 200,
+     "latency_s": 1.5091,
+     "prompt_tokens": 1047,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.5048,
+     "prompt_tokens": 1047,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.4895,
+     "prompt_tokens": 1047,
+     "error": null
+    }
+   ],
+   "median_s": 1.5048,
+   "minus_text_s": 1.1988
+  }
+ },
+ "text_only": {
+  "runs": [
+   {
+    "http_status": 200,
+    "latency_s": 0.306,
+    "prompt_tokens": 20,
+    "error": null
+   },
+   {
+    "http_status": 200,
+    "latency_s": 0.3053,
+    "prompt_tokens": 20,
+    "error": null
+   },
+   {
+    "http_status": 200,
+    "latency_s": 0.3064,
+    "prompt_tokens": 20,
+    "error": null
+   }
+  ],
+  "median_s": 0.306
+ },
+ "finished_utc": "2026-10-22T05:53:34Z"
+}

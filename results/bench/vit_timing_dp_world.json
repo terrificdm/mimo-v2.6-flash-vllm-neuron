@@ -1,0 +1,115 @@
+{
+ "started_utc": "2026-10-21T18:46:14Z",
+ "vit_dp_group": "world",
+ "n": 5,
+ "sizes": {
+  "448": {
+   "runs": [
+    {
+     "http_status": 200,
+     "latency_s": 0.6339,
+     "prompt_tokens": 219,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 0.6324,
+     "prompt_tokens": 219,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 0.6325,
+     "prompt_tokens": 219,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 0.6345,
+     "prompt_tokens": 219,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 0.6332,
+     "prompt_tokens": 219,
+     "error": null
+    }
+   ],
+   "median_s": 0.6332,
+   "minus_text_s": 0.3307
+  },
+  "896": {
+   "runs": [
+    {
+     "http_status": 200,
+     "latency_s": 1.3692,
+     "prompt_tokens": 807,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.3729,
+     "prompt_tokens": 807,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.3693,
+     "prompt_tokens": 807,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.3668,
+     "prompt_tokens": 807,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.3651,
+     "prompt_tokens": 807,
+     "error": null
+    }
+   ],
+   "median_s": 1.3692,
+   "minus_text_s": 1.0667
+  }
+ },
+ "text_only": {
+  "runs": [
+   {
+    "http_status": 200,
+    "latency_s": 0.3023,
+    "prompt_tokens": 20,
+    "error": null
+   },
+   {
+    "http_status": 200,
+    "latency_s": 0.3035,
+    "prompt_tokens": 20,
+    "error": null
+   },
+   {
+    "http_status": 200,
+    "latency_s": 0.3025,
+    "prompt_tokens": 20,
+    "error": null
+   },
+   {
+    "http_status": 200,
+    "latency_s": 0.3029,
+    "prompt_tokens": 20,
+    "error": null
+   },
+   {
+    "http_status": 200,
+    "latency_s": 0.3011,
+    "prompt_tokens": 20,
+    "error": null
+   }
+  ],
+  "median_s": 0.3025
+ },
+ "finished_utc": "2026-10-21T18:46:29Z"
+}

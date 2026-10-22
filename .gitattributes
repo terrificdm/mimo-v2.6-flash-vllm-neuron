@@ -1,0 +1,6 @@
+# The upstream remote code uses CRLF line endings; keep the patches byte-exact.
+*.patch -text
+# Binary test assets
+*.png binary
+*.mp4 binary
+*.wav binary

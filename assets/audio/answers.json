@@ -1,0 +1,32 @@
+{
+ "beeps_3.wav": {
+  "question": "How many beeps are there in this audio? Answer with a number.",
+  "answer": "3",
+  "seconds": 2.5,
+  "sha256": "11abb86bf4ea7d8112e260928024aa33124a2db7cd6aeb6c897771a7db286261",
+  "sample_rate": 24000
+ },
+ "tone_440.wav": {
+  "question": "Describe this sound in one sentence. Is there any speech?",
+  "answer": "a steady tone / beep, no speech (qualitative)",
+  "seconds": 2.0,
+  "sha256": "dcbb0490e4fed729ba6f0db2fb2fabe2dc9e859e456466d65a4534678ee7c7eb",
+  "sample_rate": 24000
+ },
+ "jfk.wav": {
+  "question": "Transcribe this audio exactly.",
+  "answer": "And so, my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+  "keywords": [
+   "fellow Americans",
+   "ask not",
+   "your country"
+  ],
+  "seconds": 11.0,
+  "source": "https://huggingface.co/datasets/Xenova/transformers.js-docs/resolve/main/jfk.wav",
+  "source_sha256": "aa81c2552465568567e670f3823117e633900d16bd6202346a72f3c8464c74c8",
+  "source_sample_rate": 44100,
+  "license": "US federal government work (public domain)",
+  "sha256": "64de8618957f488408a92783885e749b7ae780ccae42c3616bae6196919f37b6",
+  "sample_rate": 24000
+ }
+}

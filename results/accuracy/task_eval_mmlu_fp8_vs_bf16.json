@@ -1,0 +1,32 @@
+{
+ "a": "results/task_eval/mmlu_fp8_1m_mm.json",
+ "b": "results/task_eval/mmlu_bf16_4096.json",
+ "task": "mmlu",
+ "n_common": 200,
+ "acc_a": 0.805,
+ "acc_b": 0.79,
+ "same_pred": 0.985,
+ "same_correctness": 0.985,
+ "same_reply_text": 0.98,
+ "only_a_correct": [
+  {
+   "idx": 145,
+   "ref": "C",
+   "a": "C",
+   "b": "D"
+  },
+  {
+   "idx": 8101,
+   "ref": "D",
+   "a": "D",
+   "b": "B"
+  },
+  {
+   "idx": 8643,
+   "ref": "A",
+   "a": "A",
+   "b": "B"
+  }
+ ],
+ "only_b_correct": []
+}

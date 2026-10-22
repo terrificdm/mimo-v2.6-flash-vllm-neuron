@@ -1,0 +1,21 @@
+{
+ "cases": {
+  "video1": {
+   "http_status": 200,
+   "expect": 200,
+   "elapsed_s": 9.17,
+   "usage": {
+    "prompt_tokens": 16514,
+    "total_tokens": 16515,
+    "completion_tokens": 1,
+    "prompt_tokens_details": null
+   },
+   "content": "The",
+   "finish_reason": "length",
+   "ok": true
+  }
+ },
+ "ok": true,
+ "time": "2026-10-22T05:02:06Z",
+ "base": "http://127.0.0.1:8000"
+}

@@ -1,0 +1,14 @@
+{
+ "note": "summary field extracted from the neuron-monitor snapshot taken while the recommended server was running (full snapshot not included)",
+ "summary": {
+  "max_core": "3947592:14",
+  "max_core_gib": 20.1345,
+  "breakdown_gib": {
+   "constants": 0.189,
+   "model_code": 2.264,
+   "model_shared_scratchpad": 4.5,
+   "runtime_memory": 0.013,
+   "tensors": 13.168
+  }
+ }
+}

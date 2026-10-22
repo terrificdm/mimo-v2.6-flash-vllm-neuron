@@ -1,0 +1,41 @@
+{
+ "digits_1234.mp4": {
+  "answer": "1, 2, 3, 4",
+  "match_order": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "question": "Which digits appear in the video, in order? Answer with the digits separated by commas."
+ },
+ "number_739.png": {
+  "answer": "739",
+  "match": [
+   "739"
+  ],
+  "question": "What number is written in the image? Answer with the number only."
+ },
+ "red_square.png": {
+  "answer": "red",
+  "match": [
+   "red"
+  ],
+  "question": "What color is the square in the image? Answer with one word."
+ },
+ "three_circles.png": {
+  "answer": "3",
+  "match": [
+   "3",
+   "three"
+  ],
+  "question": "How many circles are in the image? Answer with a number."
+ },
+ "word_trainium.png": {
+  "answer": "TRAINIUM",
+  "match": [
+   "trainium"
+  ],
+  "question": "What word is written in the image? Answer with the word only."
+ }
+}

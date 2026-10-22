@@ -1,0 +1,36 @@
+Patch for configuration_mimo_v2.py from the Hugging Face model repo XiaomiMiMo/MiMo-V2.6-Flash-MOPD,
+revision b12f5573350bb1704513fcf119fca48e498b0423 (Copyright 2026 Xiaomi Corporation and
+The HuggingFace Inc. team; the file header states Apache License 2.0, the model repo card states MIT).
+Adapts the remote code to transformers 5.15 (API only, no math changes); see the PATCH(n) notes
+the patch adds at the top of the file. Applied by scripts/prepare_hf_reference.sh. See NOTICE.
+
+--- a/configuration_mimo_v2.py
++++ b/configuration_mimo_v2.py
+@@ -1,3 +1,13 @@
++# ---------------------------------------------------------------------------
++# mimo-v2.6-flash-vllm-neuron: patched copy of the upstream configuration_mimo_v2.py
++# (XiaomiMiMo/MiMo-V2.6-Flash-MOPD revision b12f557). No math changes:
++#   PATCH(3) vision_config / audio_config are only set as attributes when they are
++#            non-empty. The converted text-only checkpoints have {} for both; the
++#            vllm-neuron platform treats any config with a `vision_config` attribute
++#            as a vision model (hasattr check) and then fails for max_model_len 1024
++#            ("Largest bucket (1024) is smaller than vision_attention_block_size").
++#            modeling_mimo_v2.py reads both with getattr(..., None) (PATCH(3) there).
++# ---------------------------------------------------------------------------
+ # coding=utf-8
+ #
+ # Copyright 2026 Xiaomi Corporation.
+@@ -219,8 +229,11 @@
+             raise ValueError("moe_layer_freq length must match num_hidden_layers")
+         self.moe_layer_freq = moe_layer_freq
+ 
+-        self.vision_config = _to_plain_dict(vision_config)
+-        self.audio_config = _to_plain_dict(audio_config)
++        # PATCH(3): only define vision_config / audio_config when non-empty (see header)
++        if vision_config:
++            self.vision_config = _to_plain_dict(vision_config)
++        if audio_config:
++            self.audio_config = _to_plain_dict(audio_config)
+         self.processor_config = _to_plain_dict(processor_config)
+         self.image_token_id = image_token_id
+         self.video_token_id = video_token_id

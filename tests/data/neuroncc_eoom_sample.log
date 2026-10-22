@@ -1,0 +1,74 @@
+2026-10-19T08:59:25Z INFO 159658 [root]: /opt/aws_neuronx_venv_pytorch_inference_vllm_0_24_0_1_1_0/bin/neuronx-cc compile /mnt/nvme/vllm-cache/neuron/compile_cache/MODULE_HASH/dev0_63.rank0/graph.hlo --framework XLA --target trn2 --output /mnt/nvme/vllm-cache/neuron/compile_cache/MODULE_HASH/dev0_63.rank0/graph_MODULE_HASH.neff --logfile /mnt/nvme/vllm-cache/neuron/compile_cache/MODULE_HASH/dev0_63.rank0/log-neuron-cc.txt --auto-cast=none --verbose=35 -O1 '--internal-hlo2tensorizer-options=--modular-flow-mac-threshold=10 --experimental-unsafe-fp8e4m3fn-as-fp8e4m3' '--internal-backend-options=--enable-verifier=false --enable-nested-dynamic-loop'
+2026-10-19T08:59:34Z INFO 160002 (nc00/sgLnk) [HBMUsage]: 
+┌───────────────┬──────────┬───────────────────┐
+│ DMA Ring Type │ I/O Size │ Spill/Reload Size │
+├───────────────┼──────────┼───────────────────┤
+│ Copy          │ 536.09KB │ 72.94KB           │
+│ CCE           │ 0B       │ 30.56KB           │
+│ Transpose     │ 0B       │ 0B                │
+│ Replicate     │ 0B       │ 0B                │
+│ Overhead      │ 34.25KB  │ 14.75KB           │
+└───────────────┴──────────┴───────────────────┘
+
+2026-10-19T08:59:34Z INFO 160002 (nc00/sgLnk) [HBMUsage]: 
+┌─────────────────────┬──────────┐
+│ DRAM Memory Usage   │ Size     │
+├─────────────────────┼──────────┤
+│ Total:              │ 26.93GB  │
+│ Model Code          │ 0B       │
+│ Model Constants     │ 321.26KB │
+│ Unallocated Tensors │ 7.06GB   │
+│ Allocated Tensors   │ 19.87GB  │
+│ DMA Ring IO         │ 570.34KB │
+│ DMA Ring Spill      │ 118.25KB │
+└─────────────────────┴──────────┘
+
+2026-10-19T08:59:34Z INFO 160002 (nc01/sgLnk) [HBMUsage]: 
+┌───────────────┬──────────┬───────────────────┐
+│ DMA Ring Type │ I/O Size │ Spill/Reload Size │
+├───────────────┼──────────┼───────────────────┤
+│ Copy          │ 536.06KB │ 72.59KB           │
+│ CCE           │ 0B       │ 18.56KB           │
+│ Transpose     │ 0B       │ 0B                │
+│ Replicate     │ 0B       │ 0B                │
+│ Overhead      │ 34.00KB  │ 12.00KB           │
+└───────────────┴──────────┴───────────────────┘
+
+2026-10-19T08:59:34Z INFO 160002 (nc01/sgLnk) [HBMUsage]: 
+┌─────────────────────┬──────────┐
+│ DRAM Memory Usage   │ Size     │
+├─────────────────────┼──────────┤
+│ Total:              │ 13.68GB  │
+│ Model Code          │ 0B       │
+│ Model Constants     │ 240.00KB │
+│ Unallocated Tensors │ 7.06GB   │
+│ Allocated Tensors   │ 6.62GB   │
+│ DMA Ring IO         │ 570.06KB │
+│ DMA Ring Spill      │ 103.16KB │
+└─────────────────────┴──────────┘
+
+2026-10-19T08:59:34Z ERROR 160002 [neuronxcc/walrus/hbm_usage/src/hbm_usage.cpp:124]: Assertion failure: TotalDRAMUsage <= HBMLimit
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]: ***************************************************************
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:  An Internal Compiler Error has occurred
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]: ***************************************************************
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]: 
+2026-10-19T08:59:34Z USER 159660 [neuronxcc.driver.CommandDriverMain]: Non-signal exit. Backend exited with code 1 and stderr: [ERROR] [NCC_EOOM002] Maximum peak HBM usage of 33.56GB exceeds HBM limit of 24.00GB for Trn2. This consists of 561.26KB model constants, 14.12GB I/O tensors, 26.50GB internal (scratchpad) tensors, 1.11MB DMA ring I/O, and 221.41KB DMA ring spills - Check the target architecture flag to ensure you are compiling for correct target, or consider using smaller batches or applying model/tensor parallelism.
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]: 
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]: Internal details:
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]: Type: <class 'neuronxcc.driver.Exceptions.CompilerInternalError'>
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/CommandDriverMain.py", line 346, in neuronxcc.driver.CommandDriverMain.CommandDriver.run_subcommand
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/commands/CompileCommand.py", line 1713, in neuronxcc.driver.commands.CompileCommand.CompileCommand.run
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/commands/CompileCommand.py", line 1623, in neuronxcc.driver.commands.CompileCommand.CompileCommand.runPipeline
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/commands/CompileCommand.py", line 1675, in neuronxcc.driver.commands.CompileCommand.CompileCommand.runPipeline
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/commands/CompileCommand.py", line 1652, in neuronxcc.driver.commands.CompileCommand.CompileCommand.runPipeline
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/commands/CompileCommand.py", line 1655, in neuronxcc.driver.commands.CompileCommand.CompileCommand.runPipeline
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/Job.py", line 373, in neuronxcc.driver.Job.SingleInputJob.run
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/Job.py", line 402, in neuronxcc.driver.Job.SingleInputJob.runOnState
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/Pipeline.py", line 31, in neuronxcc.driver.Pipeline.Pipeline.runSingleInput
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/jobs/WalrusDriver.py", line 371, in neuronxcc.driver.jobs.WalrusDriver.WalrusDriver.run
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/jobs/WalrusDriver.py", line 346, in neuronxcc.driver.jobs.WalrusDriver.WalrusDriver.runVNC
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/jobs/WalrusDriver.py", line 934, in neuronxcc.driver.jobs.WalrusDriver.WalrusDriver.runSingleInput
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/jobs/WalrusDriver.py", line 526, in neuronxcc.driver.jobs.WalrusDriver.WalrusDriver.runWalrusDriver
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]: Context:
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/jobs/WalrusDriver.py", line 515, in neuronxcc.driver.jobs.WalrusDriver.WalrusDriver.runWalrusDriver
+2026-10-19T08:59:34Z ERROR 159660 [neuronxcc.driver.CommandDriverMain]:   File "neuronxcc/driver/Job.py", line 247, in neuronxcc.driver.Job.Job.shellCommand

@@ -1,0 +1,47 @@
+Patch for modeling_mimo_v2.py from the Hugging Face model repo XiaomiMiMo/MiMo-V2.6-Flash-MOPD,
+revision b12f5573350bb1704513fcf119fca48e498b0423 (Copyright 2026 Xiaomi Corporation and
+The HuggingFace Inc. team; the file header states Apache License 2.0, the model repo card states MIT).
+Adapts the remote code to transformers 5.15 (API only, no math changes); see the PATCH(n) notes
+the patch adds at the top of the file. Applied by scripts/prepare_hf_reference.sh. See NOTICE.
+
+--- a/modeling_mimo_v2.py
++++ b/modeling_mimo_v2.py
+@@ -1,3 +1,14 @@
++# ---------------------------------------------------------------------------
++# mimo-v2.6-flash-vllm-neuron: minimally patched copy of the upstream remote code
++# (XiaomiMiMo/MiMo-V2.6-Flash-MOPD revision b12f557, written for transformers 5.3)
++# so it runs under transformers 5.15 (the version on the trn2 AMI).
++# API adaptation only, no math changes:
++#   PATCH(1) MiMoV2Model.forward mask_kwargs: "input_embeds" -> "inputs_embeds"
++#   PATCH(2) MiMoV2Model.forward mask_kwargs: drop "cache_position" (removed from
++#            create_causal_mask / create_sliding_window_causal_mask signatures)
++#   PATCH(3) MiMoV2ForCausalLM.__init__: read vision_config / audio_config with
++#            getattr(config, ..., None) (paired with configuration_mimo_v2.py PATCH(3))
++# ---------------------------------------------------------------------------
+ # coding=utf-8
+ #
+ # Copyright 2026 Xiaomi Corporation.
+@@ -1642,9 +1653,9 @@
+         if not isinstance(causal_mask_mapping := attention_mask, dict):
+             mask_kwargs = {
+                 "config": self.config,
+-                "input_embeds": inputs_embeds,
++                "inputs_embeds": inputs_embeds,  # PATCH(1): transformers 5.15 renamed input_embeds -> inputs_embeds
+                 "attention_mask": attention_mask,
+-                "cache_position": cache_position,
++                # PATCH(2): transformers 5.15 mask helpers no longer accept cache_position
+                 "past_key_values": past_key_values,
+                 "position_ids": position_ids,
+             }
+@@ -1703,9 +1714,9 @@
+         self.vocab_size = config.vocab_size
+         self.lm_head = nn.Linear(config.hidden_size, config.vocab_size, bias=False)
+ 
+-        if config.vision_config:
++        if getattr(config, "vision_config", None):  # PATCH(3)
+             self.visual = MiMoVisionTransformer(_as_namespace(config.vision_config))
+-        if config.audio_config:
++        if getattr(config, "audio_config", None):  # PATCH(3)
+             audio_cfg = _as_namespace(config.audio_config)
+             self.speech_embeddings = _build_speech_embeddings(audio_cfg)
+             self.audio_encoder = MiMoAudioEncoder(audio_cfg)

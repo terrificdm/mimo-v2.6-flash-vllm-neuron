@@ -1,0 +1,115 @@
+{
+ "started_utc": "2026-10-21T18:02:03Z",
+ "vit_dp_group": null,
+ "n": 5,
+ "sizes": {
+  "448": {
+   "runs": [
+    {
+     "http_status": 200,
+     "latency_s": 1.5876,
+     "prompt_tokens": 219,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.5874,
+     "prompt_tokens": 219,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.5882,
+     "prompt_tokens": 219,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.5869,
+     "prompt_tokens": 219,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 1.5858,
+     "prompt_tokens": 219,
+     "error": null
+    }
+   ],
+   "median_s": 1.5874,
+   "minus_text_s": 1.2852
+  },
+  "896": {
+   "runs": [
+    {
+     "http_status": 200,
+     "latency_s": 2.3187,
+     "prompt_tokens": 807,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 2.3291,
+     "prompt_tokens": 807,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 2.3166,
+     "prompt_tokens": 807,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 2.3157,
+     "prompt_tokens": 807,
+     "error": null
+    },
+    {
+     "http_status": 200,
+     "latency_s": 2.321,
+     "prompt_tokens": 807,
+     "error": null
+    }
+   ],
+   "median_s": 2.3187,
+   "minus_text_s": 2.0165
+  }
+ },
+ "text_only": {
+  "runs": [
+   {
+    "http_status": 200,
+    "latency_s": 0.3031,
+    "prompt_tokens": 20,
+    "error": null
+   },
+   {
+    "http_status": 200,
+    "latency_s": 0.3033,
+    "prompt_tokens": 20,
+    "error": null
+   },
+   {
+    "http_status": 200,
+    "latency_s": 0.3018,
+    "prompt_tokens": 20,
+    "error": null
+   },
+   {
+    "http_status": 200,
+    "latency_s": 0.3022,
+    "prompt_tokens": 20,
+    "error": null
+   },
+   {
+    "http_status": 200,
+    "latency_s": 0.3019,
+    "prompt_tokens": 20,
+    "error": null
+   }
+  ],
+  "median_s": 0.3022
+ },
+ "finished_utc": "2026-10-21T18:02:30Z"
+}

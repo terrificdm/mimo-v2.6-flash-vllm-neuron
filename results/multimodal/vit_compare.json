@@ -1,0 +1,32 @@
+{
+ "passed": true,
+ "items": {
+  "space_woaudio.mp4": {
+   "cos_dev_hf_bf16": 0.9983355497277688,
+   "cos_dev_hf_fp32": 0.9983726458735264,
+   "cos_hf_bf16_fp32": 0.9983112762656898,
+   "three_way_passed": true,
+   "dump": "$MIMO_WORK/results/vit_dump/vit_001.pt",
+   "main_passed": false,
+   "fallback_passed": true,
+   "passed": true
+  },
+  "beach_dog.jpeg": {
+   "cos_dev_hf_bf16": 0.9949340240595264,
+   "cos_dev_hf_fp32": 0.9938163923830907,
+   "cos_hf_bf16_fp32": 0.9954446812009246,
+   "three_way_passed": true,
+   "dump": "$MIMO_WORK/results/vit_dump/vit_002.pt",
+   "main_passed": false,
+   "fallback_passed": true,
+   "passed": true
+  }
+ },
+ "num_dumps": 3,
+ "dumps": "$MIMO_WORK/results/vit_dump",
+ "goldens": "$MIMO_WORK/goldens/mm/vit_goldens_large.pt",
+ "kinds": {
+  "space_woaudio.mp4": "video",
+  "beach_dog.jpeg": "image"
+ }
+}

@@ -1,0 +1,81 @@
+mimo-v2.6-flash-vllm-neuron
+Copyright 2026 The mimo-v2.6-flash-vllm-neuron Authors
+
+This project is licensed under the Apache License, Version 2.0 (see LICENSE).
+It contains code adapted from, or written with reference to, the third-party projects listed below.
+Files that contain adapted code say so in their header.
+
+-------------------------------------------------------------------------------
+1. vllm-project/vllm-neuron  (Apache License 2.0)
+   https://github.com/vllm-project/vllm-neuron  (version 0.24.0.1.1.0)
+-------------------------------------------------------------------------------
+Adapted and modified:
+  plugin/mimo_v2_neuron/model/mimo_v2/model.py
+      from vllm_neuron/model/gpt_oss/model_bf16.py (model layout, GptOssForCausalLM.forward)
+  plugin/mimo_v2_neuron/model/mimo_v2/vision_encoder.py
+      from vllm_neuron/model/qwen3_vl/vision_encoder_bf16.py (block-packed layout, vision TP / DP groups)
+  plugin/mimo_v2_neuron/model/mimo_v2/model_mm.py
+      from vllm_neuron/model/qwen3_vl/model_bf16.py (embed_multimodal) and
+      vllm_neuron/model/qwen3_vl/utils/merge_vision_embeds.py (embedding merge)
+  scripts/accuracy/run_logit_validation.py
+      from examples/vllm_neuron/accuracy/run_logit_validation_offline.py
+Runtime patches:
+  plugin/mimo_v2_neuron/runner_patches.py and plugin/mimo_v2_neuron/mm_patches.py patch vllm-neuron at
+  runtime (installed files are not edited); runner_patches.py contains short excerpts of
+  vllm_neuron/vllm/worker/neuron_model_runner.py used to check that the patched code is present.
+
+-------------------------------------------------------------------------------
+2. nkilib, the NKI kernel library installed with the AWS Neuron SDK  (Apache License 2.0)
+-------------------------------------------------------------------------------
+  plugin/mimo_v2_neuron/model/mimo_v2/nki_kv.py
+      the indirect-DMA KV-cache write follows _update_block_cache_vectorized
+  plugin/mimo_v2_neuron/model/mimo_v2/nki_attn.py
+      the register_load + fori_loop pattern follows core/attention/attention_segmented_cte.py and
+      attention_cte.py (read-only reference, no code copied)
+  The MoE kernels (core/moe/moe_cte, core/moe/moe_tkg) are called from the installed package, not copied.
+
+-------------------------------------------------------------------------------
+3. vLLM  (Apache License 2.0)
+   https://github.com/vllm-project/vllm  (version 0.24.0)
+-------------------------------------------------------------------------------
+  Runtime dependency; no vLLM source is copied. plugin/mimo_v2_neuron/model/mimo_v2/fp8_linear.py and
+  nki_fp8.py reimplement the numerics of vLLM's Fp8LinearMethod / per_token_group_quant_fp8 (block-scaled
+  FP8 W8A8). factory_mm.py imports vLLM's MiMo-Omni processor (vllm.model_executor.models.mimo_v2_omni)
+  unmodified. Some tests use vLLM functions as reference oracles.
+
+-------------------------------------------------------------------------------
+4. XiaomiMiMo/MiMo-V2.6-Flash-MOPD remote code
+   https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-MOPD  (revision b12f5573350bb1704513fcf119fca48e498b0423)
+   Copyright 2026 Xiaomi Corporation; Copyright 2026 The HuggingFace Inc. team.
+   modeling_mimo_v2.py / configuration_mimo_v2.py carry an Apache License 2.0 header;
+   the model repository card declares the MIT License.
+-------------------------------------------------------------------------------
+  patches/modeling_mimo_v2.py.patch, patches/configuration_mimo_v2.py.patch
+      Modifications to the upstream remote code for transformers 5.15 (API changes only: inputs_embeds
+      keyword, removed cache_position argument, empty vision_config / audio_config not set as attributes).
+      The patches contain context lines of the upstream files. The upstream files themselves are NOT
+      redistributed in this repository: scripts/prepare_hf_reference.sh copies them from the user's own
+      download of the pinned revision, verifies their SHA-256, and applies the patches into reference/
+      (git-ignored). The patched files keep the original copyright and license header and gain a header
+      block that lists each modification.
+  plugin/mimo_v2_neuron/model/mimo_v2/audio_encoder.py
+      ports AudioTokenizerEncoder, the residual VQ and MiMoAudioEncoder from modeling_mimo_v2.py,
+      rewritten with plain tensor ops.
+  plugin/mimo_v2_neuron/model/mimo_v2/vision_encoder.py, routing.py, attention_torch.py
+      follow the maths of MiMoVisionTransformer, MiMoV2MoEGate and eager_attention_forward in
+      modeling_mimo_v2.py (independent implementations).
+  Model weights are not included and are subject to the model repository's license.
+
+-------------------------------------------------------------------------------
+5. Test assets (assets/)
+-------------------------------------------------------------------------------
+  assets/audio/jfk.wav: excerpt of the 1961 inaugural address of John F. Kennedy (a work of the U.S.
+      federal government, public domain), downloaded from the Hugging Face dataset
+      Xenova/transformers.js-docs and resampled (see scripts/api_tests/make_audio_assets.py).
+  All other files in assets/ are synthetic and generated by scripts/api_tests/make_mm_assets.py and
+  scripts/api_tests/make_audio_assets.py.
+
+-------------------------------------------------------------------------------
+6. Read-only references (no code copied)
+-------------------------------------------------------------------------------
+  aws-neuron/nki-samples (MIT-0).

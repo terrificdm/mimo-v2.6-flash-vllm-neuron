@@ -1,0 +1,61 @@
+{
+ "utc": "2026-10-22T14:40:15Z",
+ "prompts_file": "$MIMO_WORK/results/api/needle_fp8_ctx1m_prompts.json",
+ "max_tokens": 64,
+ "compare": null,
+ "cases": [
+  {
+   "id": "N1@940000@10",
+   "prompt_tokens": 940004,
+   "ttft_s": {
+    "cold": 204.246,
+    "repeat": 2.887,
+    "follow_up": 2.819
+   },
+   "cached_tokens": {
+    "cold": null,
+    "repeat": null,
+    "follow_up": null
+   },
+   "repeat_identical": true,
+   "records": {
+    "cold": {
+     "http_status": 200,
+     "ttft_s": 204.246,
+     "elapsed_s": 206.833,
+     "usage": {
+      "prompt_tokens": 940004,
+      "total_tokens": 940012,
+      "completion_tokens": 8
+     },
+     "text": "7492-ALPHA",
+     "error": null
+    },
+    "repeat": {
+     "http_status": 200,
+     "ttft_s": 2.887,
+     "elapsed_s": 5.475,
+     "usage": {
+      "prompt_tokens": 940004,
+      "total_tokens": 940012,
+      "completion_tokens": 8
+     },
+     "text": "7492-ALPHA",
+     "error": null
+    },
+    "follow_up": {
+     "http_status": 200,
+     "ttft_s": 2.819,
+     "elapsed_s": 8.974,
+     "usage": {
+      "prompt_tokens": 940039,
+      "total_tokens": 940056,
+      "completion_tokens": 17
+     },
+     "text": "7492-ALPHA\n\nIt was found in the blue warehouse.",
+     "error": null
+    }
+   }
+  }
+ ]
+}

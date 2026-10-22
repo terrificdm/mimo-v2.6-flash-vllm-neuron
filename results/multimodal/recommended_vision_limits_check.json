@@ -1,0 +1,101 @@
+{
+ "cases": {
+  "text": {
+   "http_status": 200,
+   "expect": 200,
+   "elapsed_s": 0.19,
+   "usage": {
+    "prompt_tokens": 12,
+    "total_tokens": 13,
+    "completion_tokens": 1,
+    "prompt_tokens_details": null
+   },
+   "content": "OK",
+   "finish_reason": "length",
+   "ok": true
+  },
+  "video1": {
+   "http_status": 200,
+   "expect": 200,
+   "elapsed_s": 7.73,
+   "usage": {
+    "prompt_tokens": 14210,
+    "total_tokens": 14211,
+    "completion_tokens": 1,
+    "prompt_tokens_details": null
+   },
+   "content": "Based",
+   "finish_reason": "length",
+   "ok": true
+  },
+  "video": {
+   "http_status": 200,
+   "expect": 200,
+   "elapsed_s": 8.48,
+   "usage": {
+    "prompt_tokens": 14213,
+    "total_tokens": 14285,
+    "completion_tokens": 72,
+    "prompt_tokens_details": null
+   },
+   "content": "The video features a man in a dark polo shirt and khaki pants standing in a control center, gesturing with his hands as if explaining something. The scene then transitions to a montage of various images, including a close-up of the man's face, a group of people in a control room, and two men standing together, one holding a microphone.",
+   "finish_reason": "stop",
+   "ok": true
+  },
+  "image": {
+   "http_status": 200,
+   "expect": 200,
+   "elapsed_s": 2.22,
+   "usage": {
+    "prompt_tokens": 1033,
+    "total_tokens": 1062,
+    "completion_tokens": 29,
+    "prompt_tokens_details": null
+   },
+   "content": "A woman sits on a sandy beach at sunset, smiling as she holds the paw of a large, light-colored dog wearing a colorful harness.",
+   "finish_reason": "stop",
+   "ok": true
+  },
+  "images2": {
+   "http_status": 200,
+   "expect": 200,
+   "elapsed_s": 3.39,
+   "usage": {
+    "prompt_tokens": 1669,
+    "total_tokens": 1717,
+    "completion_tokens": 48,
+    "prompt_tokens_details": null
+   },
+   "content": "Based on the images provided:\n\n*   **First image:** A dog (appearing to be a Golden Retriever or Labrador) interacting with a person on a beach.\n*   **Second image:** A cat (appearing to be",
+   "finish_reason": "length",
+   "ok": true
+  },
+  "reject": {
+   "http_status": 400,
+   "expect": 400,
+   "elapsed_s": 1.98,
+   "usage": null,
+   "content": "",
+   "finish_reason": null,
+   "error": "{\"error\":{\"message\":\"this request needs 18 vision/audio encoder blocks (image 1, image 1, video 16; 1 block = 1024 tokens per image / video time group, 1 per audio) but the compiled configuration takes at most 16 per request; send fewer or smaller images / videos\",\"type\":\"BadRequestError\",\"param\":null,\"code\":400}}",
+   "ok": true
+  },
+  "after": {
+   "http_status": 200,
+   "expect": 200,
+   "elapsed_s": 0.24,
+   "usage": {
+    "prompt_tokens": 12,
+    "total_tokens": 14,
+    "completion_tokens": 2,
+    "prompt_tokens_details": null
+   },
+   "content": "OK",
+   "finish_reason": "stop",
+   "ok": true
+  }
+ },
+ "ok": true,
+ "time": "2026-10-22T14:42:05Z",
+ "base": "http://127.0.0.1:8000"
+}

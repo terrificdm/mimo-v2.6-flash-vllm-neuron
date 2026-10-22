@@ -1,0 +1,28 @@
+{
+ "utc": "2026-10-22T14:48:29Z",
+ "prompts_file": "$MIMO_WORK/results/longctx/needle_ctx32k_prompts.json",
+ "max_tokens": 128,
+ "cases": [
+  {
+   "id": "N2@30000@50",
+   "kind": "tdec",
+   "prompt_tokens": 30005,
+   "ttft_s": 0.265,
+   "t_dec_s": 0.0475,
+   "records": [
+    {
+     "http_status": 200,
+     "ttft_s": 0.265,
+     "usage": {
+      "prompt_tokens": 30005,
+      "total_tokens": 30133,
+      "completion_tokens": 128
+     },
+     "error": null,
+     "n_chunks": 126,
+     "elapsed_s": 6.296
+    }
+   ]
+  }
+ ]
+}
