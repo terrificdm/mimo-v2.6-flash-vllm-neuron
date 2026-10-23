@@ -201,10 +201,16 @@ If the log shows `killing compiler processes`, that start fails; start the serve
 compiling are reused from the cache. Once the server is ready you can `tmux kill-session -t memguard` (later starts
 load from the cache and do not compile).
 
-Recommended configuration — **1M context + image / video / audio + prefix caching**:
+Recommended configuration — **1M context + image / video / audio + prefix caching**. First open a tmux session for
+the server (this switches you into it; detach later with Ctrl-b d, reattach with `tmux attach -t serve`):
 
 ```bash
-tmux new -s serve                                       # detach with Ctrl-b d
+tmux new -s serve
+```
+
+Then run the following inside that tmux window:
+
+```bash
 source /opt/aws_neuronx_venv_pytorch_inference_vllm_0_24_0_1_1_0/bin/activate
 export VLLM_CACHE_ROOT=/mnt/nvme/vllm-cache             # compile cache on the NVMe RAID
 export PYTHONPATH=$HOME/mimo-work/pydeps                # only for MP3 / FLAC / Ogg (Step 1, optional)

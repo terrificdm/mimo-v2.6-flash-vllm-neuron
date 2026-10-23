@@ -190,10 +190,16 @@ tail -f ~/mimo-work/mem_guard.log            # 每 30 秒一行：avail=<可用�
 日志里出现 `killing compiler processes` 时这次启动会失败；重新启动服务即可，已编译好的图在缓存里。服务就绪后可以
 `tmux kill-session -t memguard`（之后从缓存启动不再编译）。
 
-推荐配置——**1M 上下文 + 图片 / 视频 / 音频 + 前缀缓存**：
+推荐配置——**1M 上下文 + 图片 / 视频 / 音频 + 前缀缓存**。先给服务开一个 tmux 会话（会直接切进去；之后用 Ctrl-b d
+退出窗口，用 `tmux attach -t serve` 回来）：
 
 ```bash
-tmux new -s serve                                       # Ctrl-b d 退出 tmux 窗口
+tmux new -s serve
+```
+
+然后在这个 tmux 窗口里执行：
+
+```bash
 source /opt/aws_neuronx_venv_pytorch_inference_vllm_0_24_0_1_1_0/bin/activate
 export VLLM_CACHE_ROOT=/mnt/nvme/vllm-cache             # 编译缓存放在 NVMe RAID 上
 export PYTHONPATH=$HOME/mimo-work/pydeps                # 只有 MP3 / FLAC / Ogg 需要（步骤 1，可选）
