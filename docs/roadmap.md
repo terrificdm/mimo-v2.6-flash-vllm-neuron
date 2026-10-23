@@ -113,7 +113,7 @@ In the authors' priority order. Effort figures are rough estimates, not measurem
 10. **MiMo-V2.6-Pro-MOPD on Trn3** (same architecture family, 70 layers, hidden 6144, 384 experts, about 1T
     parameters). Rough estimate 1.5–3 weeks after the 0.29 migration; sharding and HBM planning must be redone,
     likely with context parallelism. Not measured.
-11. **Compile cache on S3.** Saves the first-launch compile (about 1 hour) on new instances. Half a day; the cache is
+11. **Compile cache on S3.** Saves the first-launch compile (about 1.5–2 hours) on new instances. Half a day; the cache is
     invalidated by SDK or flag changes.
 12. **Report the 18 upstream issues** (with minimal reproductions) found during the port. Half a day.
 13. **Contribute the plugin upstream** (`vllm_neuron/model/mimo_v2/`), after aligning with the maintainers and the

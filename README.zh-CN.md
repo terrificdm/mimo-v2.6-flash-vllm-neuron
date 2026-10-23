@@ -219,7 +219,8 @@ vllm serve /mnt/nvme/models/MiMo-V2.6-Flash-MOPD-fp8-mm-audio \
   --host 127.0.0.1 --port 8000
 ```
 
-**耗时：**第一次启动要编译约 **1 小时**；之后复用编译缓存，约 **18 分钟**就绪（把 350 GB 加载到 64 个核上）。
+**耗时：**编译缓存为空时，第一次启动约 **1.5–2 小时**：先用约 10 分钟加载权重，再编译约 40 张图。decode 图是一张接一张
+编译的，长上下文的每张要 10 分钟以上（4 个请求 × 512K 用了 13 分钟）。之后复用编译缓存，约 **18 分钟**就绪（把 350 GB 加载到 64 个核上）。
 `curl -sf http://127.0.0.1:8000/v1/models` 列出 `mimo-v2.6-flash` 就是就绪了。启动日志里每个 worker 打印一行
 `MiMoV2 Neuron: switches: MIMO_FP8_IMPL=nki(default) ...`，列出每个插件开关的取值和来源。
 
@@ -342,7 +343,7 @@ vllm bench serve --backend vllm --base-url http://127.0.0.1:8000 --model mimo-v2
 - 音频：WAV，装了 soundfile 后还支持 FLAC / MP3 / Ogg；最长 32 s，每个请求一段。
 - 开启思考时，模型有时漏掉思考结束标记，整段回复都落在 `reasoning` 里。
 - 没有推测解码、FP8 KV 缓存或 DP（数据并行）注意力。
-- 第一次编译约 1 小时；权重和编译缓存都在实例存储上。
+- 第一次编译约 1.5–2 小时；权重和编译缓存都在实例存储上。
 
 ## 后续计划
 
@@ -358,7 +359,7 @@ vllm bench serve --backend vllm --base-url http://127.0.0.1:8000 --model mimo-v2
 
 更多情况：[docs/troubleshooting.md](docs/troubleshooting.md)。
 
-- **20 分钟后还没就绪**——第一次启动要编译约 1 小时；看 `serve` tmux 里的日志。
+- **20 分钟后还没就绪**——第一次启动要编译约 1.5–2 小时；看 `serve` tmux 里的日志。
 - **编译期间服务或编译器消失**——主机内存不足；跑 `scripts/mem_guard.sh`。
 - **`NCC_EOOM002` / decode 图超过 24 GB HBM**——缺 `--num-gpu-blocks-override`。
 - **HTTP 400 `this request needs N vision/audio encoder blocks ...`**——一个请求超过 16 块；把内容分开发，或降低视频分辨率。

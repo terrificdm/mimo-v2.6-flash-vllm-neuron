@@ -230,7 +230,9 @@ vllm serve /mnt/nvme/models/MiMo-V2.6-Flash-MOPD-fp8-mm-audio \
   --host 127.0.0.1 --port 8000
 ```
 
-**Time:** the first launch compiles for about **1 hour**; later launches reuse the compile cache and are ready in
+**Time:** the first launch from an empty compile cache takes about **1.5–2 hours**: about 10 minutes to load the
+weights, then about 40 graphs to compile. The decode graphs compile one after another, and the long-context ones take
+10 minutes or more each (4 requests × 512K took 13 minutes). Later launches reuse the compile cache and are ready in
 about **18 minutes** (loading 350 GB onto 64 cores). Ready when `curl -sf http://127.0.0.1:8000/v1/models` lists
 `mimo-v2.6-flash`. The startup log prints one line per worker,
 `MiMoV2 Neuron: switches: MIMO_FP8_IMPL=nki(default) ...`, with the value and source of every plugin switch.
@@ -362,7 +364,7 @@ Details and causes: [docs/limitations.md](docs/limitations.md).
 - Audio: WAV, and FLAC / MP3 / Ogg with soundfile; at most 32 s, one clip per request.
 - With thinking on, the model sometimes omits the end-of-thinking marker and the whole reply lands in `reasoning`.
 - No speculative decoding, FP8 KV cache or DP attention.
-- First compile about 1 hour; weights and compile cache live on instance storage.
+- First compile about 1.5–2 hours; weights and compile cache live on instance storage.
 
 ## Roadmap
 
@@ -379,7 +381,7 @@ Details and estimates: [docs/roadmap.md](docs/roadmap.md).
 
 More cases: [docs/troubleshooting.md](docs/troubleshooting.md).
 
-- **Not ready after 20 minutes** — the first launch compiles for about 1 hour; watch the log in the `serve` tmux.
+- **Not ready after 20 minutes** — the first launch compiles for about 1.5–2 hours; watch the log in the `serve` tmux.
 - **Server or compiler disappears during compilation** — host out of memory; run `scripts/mem_guard.sh`.
 - **`NCC_EOOM002` / decode graph above 24 GB HBM** — `--num-gpu-blocks-override` is missing.
 - **HTTP 400 `this request needs N vision/audio encoder blocks ...`** — more than 16 blocks in one request; send the

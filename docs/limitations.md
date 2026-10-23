@@ -18,7 +18,7 @@ this port rather than limits of the model; they are marked as such. Directions f
 
 ## Start-up
 
-- First compile of the recommended 1M + multimodal configuration takes about 1 hour; with a warm compile cache the
+- First compile of the recommended 1M + multimodal configuration takes about 1.5–2 hours from an empty cache; with a warm compile cache the
   server is ready in about 16–18 minutes (16.0 minutes recorded with the Step 4 command and every graph cached;
   17.9 minutes for a start that had to recompile the two text prefill graphs).
 - The compile cache (`$VLLM_CACHE_ROOT`) and the weights live on instance-store NVMe. Stopping or terminating the

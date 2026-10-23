@@ -9,7 +9,7 @@ helper scripts ([development.md](development.md)), background jobs write `$MIMO_
 
 ### The server is still not ready after 20 minutes
 
-- First launch of a configuration compiles every graph. The 1M + multimodal configuration needs about 1 hour the
+- First launch of a configuration compiles every graph. The 1M + multimodal configuration needs about 1.5–2 hours the
   first time; later launches with the same command reuse `$VLLM_CACHE_ROOT` and take about 18 minutes.
 - vLLM's default timeouts (300 s / 600 s) are far too short for this; the plugin raises them when they are not set
   (`VLLM_NEURON_COMPILATION_TIMEOUT=7200`, `VLLM_EXECUTE_MODEL_TIMEOUT_SECONDS=7200`,
