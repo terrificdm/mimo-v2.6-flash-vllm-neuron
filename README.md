@@ -77,8 +77,8 @@ It ships the venv `/opt/aws_neuronx_venv_pytorch_inference_vllm_0_24_0_1_1_0`.
 > Do not upgrade or add packages inside the venv (the plugin is installed with `--no-deps`).
 
 **Disk** — original checkpoint 166 GB + FP8 directory 349.6 GB (326 GiB) + multimodal directory about 2.6 GB
-(vision 1.46 GB + audio 1.16 GB; text shards are symlinks) + compile cache (tens of GB): plan for at least 1 TB. Use the four instance-store NVMe drives in RAID 0 (about 6.9 TiB;
-check the device names with `lsblk`):
+(vision 1.46 GB + audio 1.16 GB; text shards are symlinks) + compile cache (tens of GB): plan for at least 1 TB.
+Use the four instance-store NVMe drives in RAID 0 (about 6.9 TiB; check the device names with `lsblk`):
 
 ```bash
 sudo mdadm --create /dev/md0 --level=0 --raid-devices=4 /dev/nvme1n1 /dev/nvme2n1 /dev/nvme3n1 /dev/nvme4n1
