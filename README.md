@@ -166,7 +166,9 @@ python tools/check_fp8_converted.py --src $MIMO_MODELS/MiMo-V2.6-Flash-MOPD \
   --dst $MIMO_MODELS/MiMo-V2.6-Flash-MOPD-fp8 --workers 12 --out ~/mimo-work/fp8_convert_check.json
 ```
 
-Expected: `"pass": true`, experts `changed: 0`, linear layers `changed_fraction` about 7.2×10⁻⁵
+Expected: the last terminal line is `experts lossless=True; linear changed 222672 / 3073376256 (7.25e-05); errors 0; -> ...`.
+The matching fields in the output JSON are `"pass": true`, `experts_mxfp4_to_fp8.changed: 0` and
+`linear_e4m3fn_to_trn_e4m3.changed_fraction` about 7.2×10⁻⁵
 (reference: [results/conversion/fp8_convert_check_fulldir.json](results/conversion/fp8_convert_check_fulldir.json)).
 
 Add the vision encoder and audio towers (seconds; they stay BF16 and the text shards are symlinked, so keep the

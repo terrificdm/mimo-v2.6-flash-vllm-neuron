@@ -158,7 +158,9 @@ python tools/check_fp8_converted.py --src $MIMO_MODELS/MiMo-V2.6-Flash-MOPD \
   --dst $MIMO_MODELS/MiMo-V2.6-Flash-MOPD-fp8 --workers 12 --out ~/mimo-work/fp8_convert_check.json
 ```
 
-预期：`"pass": true`，专家 `changed: 0`，线性层 `changed_fraction` 约 7.2×10⁻⁵
+预期：终端最后一行是 `experts lossless=True; linear changed 222672 / 3073376256 (7.25e-05); errors 0; -> ...`。
+输出 JSON 里对应的字段是 `"pass": true`、`experts_mxfp4_to_fp8.changed: 0`、
+`linear_e4m3fn_to_trn_e4m3.changed_fraction` 约 7.2×10⁻⁵
 （参考：[results/conversion/fp8_convert_check_fulldir.json](results/conversion/fp8_convert_check_fulldir.json)）。
 
 加上视觉编码器和音频塔（几秒；它们保持 BF16，文本分片是符号链接，所以 `-fp8` 目录要保留）：
