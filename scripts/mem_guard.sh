@@ -10,6 +10,7 @@ interval=${MEM_GUARD_INTERVAL:-30}
 min_gb=${MEM_GUARD_MIN_GB:-200}
 peak_kb=0
 peak_file=${MIMO_WORK:-$HOME/mimo-work}/status/mem_guard.peak
+mkdir -p "$(dirname "$peak_file")"
 echo "mem_guard: start $(date -u +%FT%TZ) interval=${interval}s min_available=${min_gb}GB"
 while true; do
   avail_gb=$(awk '/MemAvailable/ {printf "%d", $2 / 1048576}' /proc/meminfo)

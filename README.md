@@ -188,6 +188,19 @@ mkdir -p /mnt/nvme/mimo-work/mm_assets && cp -r assets/. /mnt/nvme/mimo-work/mm_
 
 ## Step 4. Launch the server
 
+Run `scripts/mem_guard.sh` during the first compile: when available host memory drops below 200 GB it kills only the
+compiler processes, so the machine does not run out of memory ([why](docs/design-notes.md#host-oom)). Start it in its
+own tmux session from the repository root **before** you start the server:
+
+```bash
+tmux new -d -s memguard "bash scripts/mem_guard.sh > ~/mimo-work/mem_guard.log 2>&1"
+tail -f ~/mimo-work/mem_guard.log            # every 30 s: avail=<free memory> walrus_max=<compiler peak>; Ctrl-C only stops viewing
+```
+
+If the log shows `killing compiler processes`, that start fails; start the server again and the graphs that finished
+compiling are reused from the cache. Once the server is ready you can `tmux kill-session -t memguard` (later starts
+load from the cache and do not compile).
+
 Recommended configuration — **1M context + image / video / audio + prefix caching**:
 
 ```bash
@@ -215,9 +228,6 @@ vllm serve /mnt/nvme/models/MiMo-V2.6-Flash-MOPD-fp8-mm-audio \
 about **18 minutes** (loading 350 GB onto 64 cores). Ready when `curl -sf http://127.0.0.1:8000/v1/models` lists
 `mimo-v2.6-flash`. The startup log prints one line per worker,
 `MiMoV2 Neuron: switches: MIMO_FP8_IMPL=nki(default) ...`, with the value and source of every plugin switch.
-
-Run `bash scripts/mem_guard.sh` in another tmux window during the first compile: it kills compiler processes if host
-memory drops below 200 GB ([why](docs/design-notes.md#host-oom)).
 
 | Parameter | Why |
 |---|---|

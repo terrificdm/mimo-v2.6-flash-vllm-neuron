@@ -179,6 +179,17 @@ mkdir -p /mnt/nvme/mimo-work/mm_assets && cp -r assets/. /mnt/nvme/mimo-work/mm_
 
 ## 步骤 4 启动服务
 
+第一次编译时要同时跑 `scripts/mem_guard.sh`：主机可用内存低于 200 GB 时，它只杀掉编译进程，不让整机 OOM
+（[原因](docs/design-notes.md#host-oom)）。在启动服务**之前**，在仓库根目录用单独的 tmux 会话启动它：
+
+```bash
+tmux new -d -s memguard "bash scripts/mem_guard.sh > ~/mimo-work/mem_guard.log 2>&1"
+tail -f ~/mimo-work/mem_guard.log            # 每 30 秒一行：avail=<可用内存> walrus_max=<编译器峰值>；Ctrl-C 只退出查看
+```
+
+日志里出现 `killing compiler processes` 时这次启动会失败；重新启动服务即可，已编译好的图在缓存里。服务就绪后可以
+`tmux kill-session -t memguard`（之后从缓存启动不再编译）。
+
 推荐配置——**1M 上下文 + 图片 / 视频 / 音频 + 前缀缓存**：
 
 ```bash
@@ -205,9 +216,6 @@ vllm serve /mnt/nvme/models/MiMo-V2.6-Flash-MOPD-fp8-mm-audio \
 **耗时：**第一次启动要编译约 **1 小时**；之后复用编译缓存，约 **18 分钟**就绪（把 350 GB 加载到 64 个核上）。
 `curl -sf http://127.0.0.1:8000/v1/models` 列出 `mimo-v2.6-flash` 就是就绪了。启动日志里每个 worker 打印一行
 `MiMoV2 Neuron: switches: MIMO_FP8_IMPL=nki(default) ...`，列出每个插件开关的取值和来源。
-
-第一次编译时在另一个 tmux 窗口跑 `bash scripts/mem_guard.sh`：主机内存低于 200 GB 时它会杀掉编译进程
-（[原因](docs/design-notes.md#host-oom)）。
 
 | 参数 | 作用 |
 |---|---|
